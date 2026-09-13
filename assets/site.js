@@ -6,6 +6,10 @@ if(/\/(index\.html)?$/.test(location.pathname)){
 const menu=document.querySelector('.menu'),nav=document.querySelector('.nav-links');
 menu?.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'Schließen':'Menü';nav.classList.toggle('open',open)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu?.getAttribute('aria-expanded')==='true'){menu.click();menu.focus()}});
+// GitHub Pages kann kein PHP ausfuehren. Auf github.io laeuft die Seite nur als Vorschau,
+// das Kontaktformular wird dort nicht versendet. Auf allen anderen Domains bleibt der PHP-Versand aktiv.
+const previewOnly=/(^|\.)github\.io$/i.test(location.hostname);
+const previewNotice='Dies ist eine Vorschau. Das Kontaktformular wird erst auf der ver\u00f6ffentlichten Hostinger-Website versendet. Du erreichst Anna-Lena unter <a href="mailto:annalenakorb@googlemail.com">annalenakorb@googlemail.com</a>.';
 const dialog=document.querySelector('#intro-dialog');
 if(dialog&&typeof dialog.showModal==='function'){
  let trigger;
@@ -18,9 +22,11 @@ for(const form of document.querySelectorAll('[data-contact]')){
  const selection=new URLSearchParams(location.search).get('paket');
  if(selection&&form.elements.interest.options&&[...form.elements.interest.options].some(o=>o.value===selection))form.elements.interest.value=selection;
  const buttonLabel=button.textContent;
+ // In der Vorschau wird nichts versendet, deshalb dort statt der Browser-Pruefung direkt der Hinweis.
+ if(previewOnly)form.setAttribute('novalidate','');
  let token='';
  const getToken=async()=>{const r=await fetch('api/contact.php',{credentials:'same-origin',headers:{Accept:'application/json'}});if(!r.ok)throw Error('Das Formular ist gerade nicht erreichbar. Bitte schreibe mir direkt per E-Mail.');const data=await r.json();token=data.token;};
- form.addEventListener('submit',async e=>{e.preventDefault();if(!form.reportValidity())return;button.disabled=true;button.textContent='Wird gesendet …';status.textContent='Deine Nachricht wird übertragen.';
+ form.addEventListener('submit',async e=>{e.preventDefault();if(previewOnly){status.innerHTML=previewNotice;status.focus();return;}if(!form.reportValidity())return;button.disabled=true;button.textContent='Wird gesendet …';status.textContent='Deine Nachricht wird übertragen.';
  try{if(!token)await getToken();const data=new FormData(form);if(form.hasAttribute('data-quick'))data.set('message','Ich möchte ein kostenloses Kennenlerngespräch vereinbaren.'+(data.get('message').trim()?'\n\n'+data.get('message').trim():''));data.set('token',token);const r=await fetch('api/contact.php',{method:'POST',body:data,credentials:'same-origin',headers:{Accept:'application/json'}});const result=await r.json();if(!r.ok||!result.ok)throw Error(result.message||'Der Versand ist fehlgeschlagen. Bitte schreibe an annalenakorb@googlemail.com.');form.reset();token='';status.textContent=result.message;status.focus();}
  catch(error){token='';status.textContent=error.message==='Failed to fetch'?'Die Verbindung wurde unterbrochen. Deine Eingaben bleiben erhalten. Bitte versuche es erneut oder schreibe per E-Mail.':error.message;}
  finally{button.disabled=false;button.textContent=buttonLabel;}});

@@ -1,0 +1,17 @@
+# Nur fuer den Hostinger-Upload (Apache). GitHub Pages wertet diese Datei nicht aus.
+
+Options -Indexes
+ErrorDocument 404 /404.html
+
+# Interne Verzeichnisse nicht ausliefern. contact.php liest sie weiterhin ueber das Dateisystem.
+<IfModule mod_alias.c>
+  RedirectMatch 404 ^/private/
+  RedirectMatch 404 ^/vendor/
+</IfModule>
+
+# Punktdateien (.htaccess, .nojekyll, .git*) nicht ausliefern.
+<IfModule mod_authz_core.c>
+  <FilesMatch "^\.">
+    Require all denied
+  </FilesMatch>
+</IfModule>
