@@ -1,0 +1,7 @@
+node_modules/
+test-results/
+private/rates/
+private/rate-secret.php
+.env
+.env.*
+!.env.example

@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /private/
-Disallow: /vendor/
-Disallow: /api/
-Sitemap: https://www.anna-lena-babyschlafcoach.de/sitemap.xml
+
+Sitemap: https://eliyahkorb-blip.github.io/Babyschlafcoach/sitemap.xml

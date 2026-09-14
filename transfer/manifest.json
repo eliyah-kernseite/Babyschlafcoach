@@ -1,0 +1,17 @@
+{
+  "encoding": "base64",
+  "files": [
+    {
+      "source": "transfer/zertifikat-anna-lena-korb.pdf.base64.txt",
+      "target": "assets/zertifikat-anna-lena-korb.pdf",
+      "sha256": "8cc09b48148e0302f31c409039cc2e17cf439d5572e4248163adbf0794dd4b9d",
+      "size": 367689
+    },
+    {
+      "source": "transfer/zertifikat-anna-lena-korb.png.base64.txt",
+      "target": "assets/zertifikat-anna-lena-korb.png",
+      "sha256": "9fdff2abbb99b099ed9d7a3175fcf3b65632ad7a1f1847e9aac939bb57d82430",
+      "size": 92881
+    }
+  ]
+}
