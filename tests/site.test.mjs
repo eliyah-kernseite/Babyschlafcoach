@@ -34,7 +34,7 @@ for (const [filename, page] of Object.entries(all)) {
 }
 test('Sitemap contains indexable pages only and current base URL', async () => {
   const xml = await readFile(path.join(root,'sitemap.xml'), 'utf8');
-  assert.equal([...xml.matchAll(/<loc>/g)].length, 6);
+  assert.equal([...xml.matchAll(/<loc>/g)].length, 9);
   assert.doesNotMatch(xml, /impressum|404|datenschutz/);
   assert.ok(xml.includes(site.url));
 });
