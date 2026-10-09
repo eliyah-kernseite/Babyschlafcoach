@@ -400,9 +400,10 @@ address{font-style:normal;overflow-wrap:anywhere}
 .footer-main address{margin-bottom:10px}
 .footer-main>div>p{color:var(--muted);margin-top:8px}
 .footer-bottom{border-top:1px solid var(--line-2);font-size:.83rem;color:var(--muted)}
-.footer-bottom-inner{display:flex;justify-content:space-between;gap:24px;padding-block:24px}
+.footer-bottom-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding-block:24px}
 .legal-links{display:flex;gap:22px;flex-wrap:wrap}
 .legal-links a{color:var(--muted);font-weight:550}
+.made-by a{color:var(--ink);font-weight:700;letter-spacing:.02em}
 
 /* ---------- Motion ---------- */
 .js [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:calc(var(--i,0) * 80ms)}
