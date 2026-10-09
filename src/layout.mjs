@@ -38,7 +38,8 @@ const icons = {
 };
 export const contact = (label = 'Kostenloses Kennenlernen', cls = 'button', query = '') => `<a class="${cls}" href="kontakt.html${query}">${label}${arrow}</a>`;
 export const link = (href, label) => `<a class="button ghost" href="${href}">${label}${arrow}</a>`;
-export const childcare = `<a href="${site.childcareUrl}" class="button ghost" rel="noopener noreferrer">Das Kinderkörbchen kennenlernen${arrow}</a>`;
+// Anna-Lena's own childcare practice. A plain, descriptive link (no nofollow) so it also works as a backlink.
+export const childcare = `<section class="partner" aria-labelledby="kinderkoerbchen"><div class="wrap partner-inner"><div data-reveal><p class="partner-name">Kinderkörbchen</p><h2 id="kinderkoerbchen">Meine Kindertagespflege in Eisingen</h2><p>Im Kinderkörbchen betreue ich seit 2010 Kinder in einer kleinen, familiären Gruppe. Hier ist der Alltag zu Hause, aus dem meine Erfahrung mit Schlaf, Ruhe und Eingewöhnung kommt. Die Kindertagespflege hat eine eigene Webseite mit allen Informationen zur Betreuung.</p><a class="button" href="${site.childcareUrl}" target="_blank" rel="noopener">Zur Webseite des Kinderkörbchens${arrow}</a></div><dl class="partner-facts" data-reveal style="--i:1"><div><dt>Seit</dt><dd>2010</dd></div><div><dt>Ort</dt><dd>Eisingen bei Würzburg</dd></div><div><dt>Begleitete Kinder</dt><dd>rund 100, überwiegend 0 bis 3 Jahre</dd></div><div><dt>Webseite</dt><dd><a href="${site.childcareUrl}" target="_blank" rel="noopener">kinderkörbchen.com</a></dd></div></dl></div></section>`;
 
 // No stock person is ever shown as Anna-Lena. Replace this with a real, approved portrait:
 // put portrait-640/960/1440.webp in assets/, add `portrait` to photos and return photo('portrait', …) here.
