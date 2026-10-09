@@ -91,7 +91,7 @@ Nach dem Livegang die Sitemap in der Google Search Console einreichen.
 ## Veröffentlichung
 
 Die kanonische Basis-URL ist aktuell:
-https://eliyahkorb-blip.github.io/Babyschlafcoach/
+https://eliyah-kernseite.github.io/Babyschlafcoach/
 
 Bei einem späteren Domainwechsel site.url in assets/config.js ändern und neu
 bauen. Danach Canonical, Sitemap, strukturierte Daten und 404-Seite kontrollieren.
