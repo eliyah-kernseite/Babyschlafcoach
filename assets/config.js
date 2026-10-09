@@ -1,7 +1,7 @@
 // Public configuration only. Never put credentials or private calendar data here.
 export const site = Object.freeze({
   name: 'Babyschlafberatung Anna-Lena Korb',
-  url: 'https://eliyah-kernseite.github.io/Babyschlafcoach/',
+  url: 'https://babyschlaf-coach.de/',
   email: 'babyschlafberatung.annalena@gmail.com',
   telephone: '+491732584141',
   telephoneDisplay: '0173 2584141',
