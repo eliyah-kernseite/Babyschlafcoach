@@ -17,9 +17,9 @@ export const photos = {
   babybett: { w: 960, h: 1440, alt: 'Ein Neugeborenes schläft in Rückenlage im eigenen Bett, ohne Kissen und Decke, darüber hängt ein Mobile.', author: 'Ana Curcan', source: 'https://unsplash.com/photos/newborn-baby-sleeping-peacefully-in-a-crib-9_5P8JjSxIk', subject: 'Neugeborenes schläft in Rückenlage im Babybett' },
 };
 
-export function photo(name, { sizes = '(max-width: 760px) 100vw, 50vw', priority = false, cls = '' } = {}) {
+export function photo(name, { sizes = '(max-width: 760px) 100vw, 50vw', priority = false, cls = '', alt = photos[name].alt } = {}) {
   const p = photos[name];
-  return `<img${cls ? ` class="${cls}"` : ''} src="assets/${name}-960.webp" srcset="assets/${name}-640.webp 640w, assets/${name}-960.webp 960w, assets/${name}-1440.webp 1440w" sizes="${sizes}" width="${p.w}" height="${p.h}" alt="${esc(p.alt)}" ${priority ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"'} decoding="async">`;
+  return `<img${cls ? ` class="${cls}"` : ''} src="assets/${name}-960.webp" srcset="assets/${name}-640.webp 640w, assets/${name}-960.webp 960w, assets/${name}-1440.webp 1440w" sizes="${sizes}" width="${p.w}" height="${p.h}" alt="${esc(alt)}" ${priority ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"'} decoding="async">`;
 }
 
 export const arrow = `<svg class="icon-arrow" aria-hidden="true" viewBox="0 0 20 20" width="20" height="20"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
