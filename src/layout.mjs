@@ -43,13 +43,13 @@ export const childcare = `<section class="partner" aria-labelledby="kinderkoerbc
 
 // No stock person is ever shown as Anna-Lena. Replace this with a real, approved portrait:
 // put portrait-640/960/1440.webp in assets/, add `portrait` to photos and return photo('portrait', …) here.
-export const portrait = () => `<figure class="monogram" data-reveal><img src="assets/logo.png" alt="" width="160" height="160" loading="lazy"><blockquote><p>„Ich höre zuerst zu. Dann machen wir einen Plan, der zu eurem Kind und eurem Alltag passt.“</p></blockquote><figcaption><strong>Anna-Lena Korb</strong> Babyschlafberaterin in Eisingen bei Würzburg</figcaption></figure>`;
+export const portrait = (quote = 'Ich höre zuerst zu. Dann machen wir einen Plan, der zu eurem Kind und eurem Alltag passt.', caption = 'Babyschlafberaterin in Eisingen bei Würzburg') => `<figure class="monogram" data-reveal><img src="assets/logo.png" alt="Logo der Babyschlafberatung Anna-Lena Korb" width="160" height="160" loading="lazy"><blockquote><p>„${quote}“</p></blockquote><figcaption><span class="monogram-name">Anna-Lena Korb</span> ${caption}</figcaption></figure>`;
 
 // Closing contact block on every content page, the way a practice or studio site ends: one clear invitation, all contact details.
 export const closing = (title = 'Kostenloses Kennenlernen vereinbaren') => `<section class="contact-band" aria-labelledby="closing-title"><div class="wrap contact-band-inner"><div data-reveal><h2 id="closing-title">${title}</h2><p>Erzählt mir, was eure Nächte gerade schwer macht. In 20 kostenlosen Minuten schauen wir gemeinsam, ob und wie ich euch begleiten kann, per Zoom oder Telefon, wo immer ihr in Deutschland wohnt.</p><div class="actions">${contact('Termin anfragen', 'button light')}<a class="button outline-light" href="tel:${site.telephone}">${site.telephoneDisplay}</a></div></div><ul class="contact-facts" data-reveal style="--i:1"><li>${icons.phone}<span><strong>Telefon</strong><a href="tel:${site.telephone}">${site.telephoneDisplay}</a></span></li><li>${icons.mail}<span><strong>E-Mail</strong><a href="mailto:${site.email}">${site.email}</a></span></li><li>${icons.clock}<span><strong>Gesprächszeiten</strong>Mo–Fr 17–19 Uhr, Sa 9–13 Uhr</span></li><li>${icons.pin}<span><strong>Standort</strong>Eisingen bei Würzburg, online in ganz Deutschland</span></li></ul></div></section>`;
 
 // Subpage head: a photo banner with the page title, or a calm colour band when no photo fits.
-export const pageHead = (title, text, image = '', pos = '50% 50%') => `<header class="page-head${image ? ' has-image' : ''}">${image ? `<div class="page-head-media" style="--pos:${pos}">${photo(image, { priority: true, sizes: '100vw', alt: '' })}</div>` : ''}<div class="wrap page-head-inner"><h1>${title}</h1>${text ? `<p class="lead">${text}</p>` : ''}</div></header>`;
+export const pageHead = (title, text, image = '', pos = '50% 50%') => `<header class="page-head${image ? ' has-image' : ''}">${image ? `<div class="page-head-media" style="--pos:${pos}">${photo(image, { priority: true, sizes: '100vw' })}</div>` : ''}<div class="wrap page-head-inner"><h1>${title}</h1>${text ? `<p class="lead">${text}</p>` : ''}</div></header>`;
 export const questions = items => `<div class="questions">${items.map(([q, a]) => `<details><summary><span>${q}</span><span class="plus" aria-hidden="true"></span></summary><div class="answer"><p>${a}</p></div></details>`).join('\n')}</div>`;
 const strip = html => html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 
@@ -64,7 +64,7 @@ export const navItems = [
 // Agency credit, shown once at the very bottom of every page via the global footer.
 export const credit = `<p class="credit">Mit <span aria-label="Liebe">♥</span> erstellt von <a href="https://kernseite.com" title="Webdesign Agentur Würzburg" target="_blank" rel="noopener">KERNSEITE</a> aus Würzburg</p>`;
 const legalItems = [['impressum.html', 'Impressum'], ['datenschutz.html', 'Datenschutz'], ['agb.html', 'AGB'], ['widerruf.html', 'Widerruf'], ['barrierefreiheit.html', 'Barrierefreiheit'], ['bildnachweise.html', 'Bildnachweise']];
-const brand = `<a class="brand" href="index.html" aria-label="Babyschlafberatung Anna-Lena Korb – Startseite"><img src="assets/logo.png" alt="" width="56" height="56"><span><strong>Anna-Lena Korb</strong><span class="brand-description">Babyschlafberatung</span></span></a>`;
+const brand = `<a class="brand" href="index.html" aria-label="Babyschlafberatung Anna-Lena Korb – Startseite"><img src="assets/logo.png" alt="Logo Babyschlafberatung Anna-Lena Korb" width="56" height="56"><span><span class="brand-name">Anna-Lena Korb</span><span class="brand-description">Babyschlafberatung</span></span></a>`;
 
 function navigation(file) {
   const here = href => href === file ? ' aria-current="page"' : '';
