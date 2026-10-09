@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://eliyah-kernseite.github.io/Babyschlafcoach/sitemap.xml
+Sitemap: https://babyschlaf-coach.de/sitemap.xml

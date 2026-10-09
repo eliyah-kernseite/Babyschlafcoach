@@ -91,11 +91,17 @@ Nach dem Livegang die Sitemap in der Google Search Console einreichen.
 ## Veröffentlichung
 
 Die kanonische Basis-URL ist aktuell:
-https://eliyah-kernseite.github.io/Babyschlafcoach/
+https://babyschlaf-coach.de/
 
 Bei einem späteren Domainwechsel site.url in assets/config.js ändern und neu
 bauen. Danach Canonical, Sitemap, strukturierte Daten und 404-Seite kontrollieren.
 Der Review-Branch ist nicht automatisch eine zweite Live-Website.
+
+Hosting: Hostinger, Domain-Root (public_html). Am einfachsten per GIT-Deployment
+aus dem Branch `main` nach public_html; die gebauten HTML-Dateien liegen im
+Repository-Root, ein Build auf dem Server ist nicht nötig. Die .htaccess sperrt
+Quellcode, Tests und Arbeitsdateien. GitHub Pages danach abschalten, damit es
+keine zweite Kopie der Seite gibt.
 
 ## Bestehende PHP-Dateien
 
