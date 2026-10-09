@@ -75,7 +75,12 @@ function navigation(file) {
   }).join('');
 }
 
-const pageUrl = file => new URL(file === 'index.html' ? '' : file, site.url).href;
+// Saubere Adressen ohne .html: /kontakt statt /kontakt.html, / statt /index.html. Die .htaccess liefert die Dateien dazu aus.
+export const cleanPath = file => file === 'index.html' ? '' : file.replace(/\.html$/, '');
+const pageUrl = file => new URL(cleanPath(file), site.url).href;
+const cleanLinks = html => html
+  .replaceAll('href="index.html"', 'href="./"')
+  .replace(new RegExp(`(href="|${site.url.replace(/[.\/]/g, '\\$&')})([a-z0-9-]+)\\.html(?=[#"?])`, 'g'), '$1$2');
 
 const trail = (file, page) => [['index.html', 'Startseite'], ...(page.parent ? [page.parent] : []), [file, page.label]];
 
@@ -121,6 +126,10 @@ function withBreadcrumb(file, page, content) {
 }
 
 export function layout(file, page) {
+  return cleanLinks(render(file, page));
+}
+
+function render(file, page) {
   const { title, description, label, content, noindex = false, ogImage = 'social.jpg' } = page;
   const url = pageUrl(file);
   return `<!doctype html>

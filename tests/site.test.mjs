@@ -24,7 +24,9 @@ for (const [filename, page] of Object.entries(all)) {
     for (const [, raw] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
       if (/^(https?:|mailto:|tel:)/.test(raw)) continue;
       const url = new URL(raw, new URL(filename, site.url));
-      const target = decodeURIComponent(url.pathname.slice(new URL(site.url).pathname.length)) || 'index.html';
+      let target = decodeURIComponent(url.pathname.slice(new URL(site.url).pathname.length)) || 'index.html';
+      if (/^[a-z0-9-]+$/.test(target)) target += '.html';
+      assert.doesNotMatch(raw, /^(?:index\.html|[a-z0-9-]+\.html)(?:[#?]|$)/, `${raw} should use the clean address without .html`);
       await access(path.join(root, target));
       if (url.hash && target.endsWith('.html')) {
         const other = await readFile(path.join(root, target), 'utf8');
@@ -38,6 +40,7 @@ test('Sitemap contains indexable pages only and current base URL', async () => {
   assert.equal([...xml.matchAll(/<loc>/g)].length, 14);
   assert.doesNotMatch(xml, /impressum|404|datenschutz/);
   assert.ok(xml.includes(site.url));
+  assert.doesNotMatch(xml, /\.html/);
 });
 test('No active trackers, external image/font requests or data persistence', async () => {
   const js = await readFile(path.join(root,'assets/site.js'), 'utf8');

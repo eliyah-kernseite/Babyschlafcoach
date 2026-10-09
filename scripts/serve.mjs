@@ -10,6 +10,7 @@ http.createServer(async (req, res) => {
     if (pathname.split('/').some(p => p.startsWith('.') || ['private', 'vendor', 'scripts', 'tests', 'src', 'api'].includes(p))) throw new Error('Unavailable');
     let file = path.resolve(root, `.${pathname}`);
     if (!file.startsWith(`${root}/`) && file !== root) throw new Error('Unavailable');
+    if (/\/[a-z0-9-]+$/.test(pathname)) file += '.html';
     if ((await stat(file)).isDirectory()) file = path.join(file, 'index.html');
     const body = await readFile(file);
     res.writeHead(200, { 'Content-Type': mime[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store' });
