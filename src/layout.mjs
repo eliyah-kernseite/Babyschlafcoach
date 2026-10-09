@@ -9,9 +9,12 @@ export const updated = '2026-10-09';
 // To add or swap a photo: place name-640/960/1440.webp in assets/, add an entry here.
 // The credits page is generated from this list.
 export const photos = {
-  hero: { w: 960, h: 1440, alt: 'Ein schlafendes Neugeborenes liegt geborgen im Arm eines Erwachsenen.', author: 'Brytny.com', source: 'https://unsplash.com/photos/woman-holding-baby-8ggcekgy358', subject: 'Schlafendes Neugeborenes im Arm' },
-  family: { w: 960, h: 640, alt: 'Eine kleine Kinderhand hält sich am Strickpullover eines Erwachsenen fest.', author: 'Jenna Christina', source: 'https://unsplash.com/photos/woman-carrying-baby-cRHOrqzq3J8', subject: 'Kleinkind auf dem Arm' },
-  hands: { w: 960, h: 640, alt: 'Eine Babyhand umfasst den Finger eines Erwachsenen.', author: 'Olivia Anne Snyder', source: 'https://unsplash.com/photos/adult-hand-holding-a-newborn-babys-hand-Dn_t8uidLs8', subject: 'Babyhand hält einen Finger' },
+  hero: { w: 960, h: 1440, alt: 'Ein Vater küsst sein neugeborenes Baby zärtlich auf den Kopf.', author: 'Ana Curcan', source: 'https://unsplash.com/photos/a-loving-father-kisses-his-newborn-babys-head-wYYjCdLENyQ', subject: 'Vater küsst sein Neugeborenes' },
+  nacht: { w: 960, h: 1440, alt: 'Eine Mutter hält ihr Baby in einem dunklen Zimmer nah bei sich.', author: 'Jenna Norman', source: 'https://unsplash.com/photos/woman-carrying-baby-8ybZT29CaoA', subject: 'Mutter mit Baby im abgedunkelten Zimmer' },
+  online: { w: 960, h: 720, alt: 'Eine Mutter sitzt mit ihrem Baby auf dem Schoß lächelnd vor einem Laptop.', author: 'Brian Wangenheim', source: 'https://unsplash.com/photos/girl-in-gray-hoodie-sitting-on-chair-2pRimVfww38', subject: 'Mutter mit Baby am Laptop' },
+  troesten: { w: 960, h: 699, alt: 'Ein Vater hält sein weinendes Baby im Strickpullover an der Schulter und tröstet es.', author: 'Toa Heftiba', source: 'https://unsplash.com/photos/a-man-holding-a-baby-in-his-arms-BgfxafkXjds', subject: 'Vater tröstet sein weinendes Baby' },
+  einschlafen: { w: 960, h: 640, alt: 'Ein Neugeborenes schläft ruhig auf dem Unterarm eines Erwachsenen, der seinen Kopf stützt.', author: 'Steph Quernemoen', source: 'https://unsplash.com/photos/a-newborn-baby-sleeping-peacefully-in-a-persons-arms-wwJnK-ItaKI', subject: 'Neugeborenes schläft im Arm' },
+  babybett: { w: 960, h: 1440, alt: 'Ein Neugeborenes schläft in Rückenlage im eigenen Bett, ohne Kissen und Decke, darüber hängt ein Mobile.', author: 'Ana Curcan', source: 'https://unsplash.com/photos/newborn-baby-sleeping-peacefully-in-a-crib-9_5P8JjSxIk', subject: 'Neugeborenes schläft in Rückenlage im Babybett' },
 };
 
 export function photo(name, { sizes = '(max-width: 760px) 100vw, 50vw', priority = false, cls = '' } = {}) {
