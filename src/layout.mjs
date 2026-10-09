@@ -1,4 +1,10 @@
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { site } from '../assets/config.js';
+
+// Content hash appended to CSS/JS URLs so browsers load a new version right after each deploy.
+const version = file => createHash('sha256').update(readFileSync(new URL(`../assets/${file}`, import.meta.url))).digest('hex').slice(0, 10);
+const assetVersion = { css: version('site.css'), js: version('site.js') };
 
 export const esc = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 
@@ -131,7 +137,7 @@ ${file === '404.html' ? `  <base href="${site.url}">\n` : ''}  <link rel="canoni
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/manrope.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/site.css?v=${assetVersion.css}">
   <meta property="og:type" content="${page.article ? 'article' : 'website'}">
   <meta property="og:locale" content="de_DE">
   <meta property="og:site_name" content="${site.name}">
@@ -144,7 +150,7 @@ ${file === '404.html' ? `  <base href="${site.url}">\n` : ''}  <link rel="canoni
   <meta property="og:image:alt" content="Babyschlafberatung Anna-Lena Korb: ruhigere Nächte mit Nähe und einem klaren Plan.">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">${schema(file, page)}</script>
-  <script type="module" src="assets/site.js"></script>
+  <script type="module" src="assets/site.js?v=${assetVersion.js}"></script>
 </head>
 <body>
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
