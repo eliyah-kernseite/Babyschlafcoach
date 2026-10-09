@@ -23,26 +23,52 @@ export function photo(name, { sizes = '(max-width: 760px) 100vw, 50vw', priority
 }
 
 export const arrow = `<svg class="icon-arrow" aria-hidden="true" viewBox="0 0 20 20" width="20" height="20"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const icon = d => `<svg class="icon" aria-hidden="true" viewBox="0 0 20 20" width="16" height="16"><path d="${d}" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const icons = {
+  phone: icon('M6.5 3h-2A1.5 1.5 0 0 0 3 4.6C3.3 11 9 16.7 15.4 17a1.5 1.5 0 0 0 1.6-1.5v-2l-3.4-1.4-1.6 1.6a9 9 0 0 1-4.7-4.7l1.6-1.6Z'),
+  mail: icon('M3 5h14v10H3zM3 5l7 6 7-6'),
+  clock: icon('M10 3a7 7 0 1 0 0 14 7 7 0 0 0 0-14Zm0 3.5V10l2.5 1.8'),
+  pin: icon('M10 17s5.5-5 5.5-9a5.5 5.5 0 0 0-11 0c0 4 5.5 9 5.5 9Zm0-7.2a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6Z'),
+};
 export const contact = (label = 'Kostenloses Kennenlernen', cls = 'button', query = '') => `<a class="${cls}" href="kontakt.html${query}">${label}${arrow}</a>`;
-export const link = (href, label) => `<a class="text-link" href="${href}">${label}${arrow}</a>`;
-export const childcare = `<a href="${site.childcareUrl}" class="text-link" rel="noopener noreferrer">Das Kinderkörbchen kennenlernen${arrow}</a>`;
+export const link = (href, label) => `<a class="button ghost" href="${href}">${label}${arrow}</a>`;
+export const childcare = `<a href="${site.childcareUrl}" class="button ghost" rel="noopener noreferrer">Das Kinderkörbchen kennenlernen${arrow}</a>`;
 
 // No stock person is ever shown as Anna-Lena. Replace this with a real, approved portrait:
 // put portrait-640/960/1440.webp in assets/, add `portrait` to photos and return photo('portrait', …) here.
-export const portrait = () => `<figure class="monogram" data-reveal><img src="assets/logo.png" alt="" width="160" height="160" loading="lazy"><blockquote><p>„Ich höre zuerst zu. Dann machen wir einen Plan, der zu eurem Kind und eurem Alltag passt.“</p></blockquote><figcaption><strong>Anna-Lena Korb</strong><span>Babyschlafberaterin · Eisingen bei Würzburg</span></figcaption></figure>`;
+export const portrait = () => `<figure class="monogram" data-reveal><img src="assets/logo.png" alt="" width="160" height="160" loading="lazy"><blockquote><p>„Ich höre zuerst zu. Dann machen wir einen Plan, der zu eurem Kind und eurem Alltag passt.“</p></blockquote><figcaption><strong>Anna-Lena Korb</strong> Babyschlafberaterin in Eisingen bei Würzburg</figcaption></figure>`;
 
-export const closing = (title = 'Ihr müsst nicht schon <em>alle Antworten</em> haben.') => `<section class="night" aria-labelledby="closing-title"><div class="night-sky" aria-hidden="true"></div><div class="wrap night-inner" data-reveal><svg class="moon" aria-hidden="true" viewBox="0 0 64 64" width="56" height="56"><path d="M42 8a24 24 0 1 0 14 38A20 20 0 0 1 42 8Z" fill="currentColor"/></svg><h2 id="closing-title">${title}</h2><p>Erzählt mir, was eure Nächte gerade schwer macht. In 20 kostenlosen Minuten schauen wir gemeinsam, ob und wie ich euch begleiten kann. Per Zoom oder Telefon, wo immer ihr in Deutschland wohnt.</p><div class="night-actions">${contact('Kennenlernen anfragen', 'button light')}<a class="text-link light" href="tel:${site.telephone}">${site.telephoneDisplay}</a></div><p class="night-note">20 Minuten · kostenlos · unverbindlich</p></div></section>`;
+// Closing contact block on every content page, the way a practice or studio site ends: one clear invitation, all contact details.
+export const closing = (title = 'Kostenloses Kennenlernen vereinbaren') => `<section class="contact-band" aria-labelledby="closing-title"><div class="wrap contact-band-inner"><div data-reveal><h2 id="closing-title">${title}</h2><p>Erzählt mir, was eure Nächte gerade schwer macht. In 20 kostenlosen Minuten schauen wir gemeinsam, ob und wie ich euch begleiten kann, per Zoom oder Telefon, wo immer ihr in Deutschland wohnt.</p><div class="actions">${contact('Termin anfragen', 'button light')}<a class="button outline-light" href="tel:${site.telephone}">${site.telephoneDisplay}</a></div></div><ul class="contact-facts" data-reveal style="--i:1"><li>${icons.phone}<span><strong>Telefon</strong><a href="tel:${site.telephone}">${site.telephoneDisplay}</a></span></li><li>${icons.mail}<span><strong>E-Mail</strong><a href="mailto:${site.email}">${site.email}</a></span></li><li>${icons.clock}<span><strong>Gesprächszeiten</strong>Mo–Fr 17–19 Uhr, Sa 9–13 Uhr</span></li><li>${icons.pin}<span><strong>Standort</strong>Eisingen bei Würzburg, online in ganz Deutschland</span></li></ul></div></section>`;
 
-export const pageHead = (kicker, title, text, aside = '') => `<header class="page-head wrap${aside ? ' has-aside' : ''}"><div><p class="kicker">${kicker}</p><h1>${title}</h1><p class="lead">${text}</p></div>${aside}</header>`;
+// Subpage head: a photo banner with the page title, or a calm colour band when no photo fits.
+export const pageHead = (title, text, image = '', pos = '50% 50%') => `<header class="page-head${image ? ' has-image' : ''}">${image ? `<div class="page-head-media" style="--pos:${pos}">${photo(image, { priority: true, sizes: '100vw', alt: '' })}</div>` : ''}<div class="wrap page-head-inner"><h1>${title}</h1>${text ? `<p class="lead">${text}</p>` : ''}</div></header>`;
 export const questions = items => `<div class="questions">${items.map(([q, a]) => `<details><summary><span>${q}</span><span class="plus" aria-hidden="true"></span></summary><div class="answer"><p>${a}</p></div></details>`).join('\n')}</div>`;
 const strip = html => html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 
-const navItems = [['schlafberatung.html', 'Beratung'], ['online-schlafberatung.html', 'Online-Beratung'], ['ueber-mich.html', 'Über mich'], ['preise.html', 'Preise'], ['schlafwissen.html', 'Ratgeber']];
-const guideItems = [['baby-einschlafen.html', 'Baby einschlafen'], ['baby-durchschlafen.html', 'Baby schläft nicht durch'], ['schlafwissen.html', 'Sicherer Babyschlaf']];
+export const navItems = [
+  ['schlafberatung.html', 'Schlafberatung', [['schlafberatung.html', 'Überblick'], ['schlafberatung-baby.html', 'Für Babys (0–12 Monate)'], ['schlafberatung-kleinkind.html', 'Für Kleinkinder (1–6 Jahre)'], ['online-schlafberatung.html', 'Online in ganz Deutschland'], ['schlafberatung-wuerzburg.html', 'Vor Ort in Würzburg']]],
+  ['ablauf.html', 'Ablauf'],
+  ['preise.html', 'Kosten'],
+  ['ueber-mich.html', 'Über mich'],
+  ['schlafwissen.html', 'Ratgeber', [['schlafwissen.html', 'Überblick'], ['baby-einschlafen.html', 'Baby einschlafen'], ['baby-durchschlafen.html', 'Baby schläft nicht durch'], ['schlafwissen.html#sicher', 'Sicherer Babyschlaf']]],
+  ['fragen.html', 'Häufige Fragen'],
+];
 const legalItems = [['impressum.html', 'Impressum'], ['datenschutz.html', 'Datenschutz'], ['agb.html', 'AGB'], ['widerruf.html', 'Widerruf'], ['barrierefreiheit.html', 'Barrierefreiheit'], ['bildnachweise.html', 'Bildnachweise']];
 const brand = `<a class="brand" href="index.html" aria-label="Babyschlafberatung Anna-Lena Korb – Startseite"><img src="assets/logo.png" alt="" width="56" height="56"><span><strong>Anna-Lena Korb</strong><span class="brand-description">Babyschlafberatung</span></span></a>`;
 
+function navigation(file) {
+  const here = href => href === file ? ' aria-current="page"' : '';
+  return navItems.map(([href, text, sub]) => {
+    const active = href === file || sub?.some(([h]) => h === file);
+    if (!sub) return `<a class="nav-item" href="${href}"${here(href)}>${text}</a>`;
+    return `<div class="nav-group${active ? ' is-active' : ''}"><a class="nav-item" href="${href}"${here(href)}>${text}<svg class="chevron" aria-hidden="true" viewBox="0 0 12 12" width="12" height="12"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a><div class="subnav">${sub.slice(1).map(([h, t]) => `<a href="${h}"${here(h)}>${t}</a>`).join('')}</div></div>`;
+  }).join('');
+}
+
 const pageUrl = file => new URL(file === 'index.html' ? '' : file, site.url).href;
+
+const trail = (file, page) => [['index.html', 'Startseite'], ...(page.parent ? [page.parent] : []), [file, page.label]];
 
 function schema(file, page) {
   const url = pageUrl(file);
@@ -69,10 +95,7 @@ function schema(file, page) {
     { '@type': 'WebSite', '@id': `${site.url}#website`, url: site.url, name: site.name, inLanguage: 'de-DE', publisher: { '@id': `${site.url}#beratung` } }, person, business,
     { '@type': 'WebPage', '@id': `${url}#page`, url, name: page.title, description: page.description, inLanguage: 'de-DE', isPartOf: { '@id': `${site.url}#website` }, dateModified: updated, ...(file !== 'index.html' ? { breadcrumb: { '@id': `${url}#breadcrumb` } } : {}) },
   ];
-  if (file !== 'index.html') graph.push({ '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Startseite', item: site.url },
-    { '@type': 'ListItem', position: 2, name: page.label, item: url },
-  ] });
+  if (file !== 'index.html') graph.push({ '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: trail(file, page).map(([href, name], i) => ({ '@type': 'ListItem', position: i + 1, name, item: pageUrl(href) })) });
   if (page.faq) graph.push({ '@type': 'FAQPage', '@id': `${url}#faq`, mainEntity: page.faq.map(([q, a]) => ({ '@type': 'Question', name: strip(q), acceptedAnswer: { '@type': 'Answer', text: strip(a) } })) });
   if (page.article) graph.push({ '@type': 'Article', '@id': `${url}#article`, headline: page.article.headline, description: page.description, inLanguage: 'de-DE', mainEntityOfPage: { '@id': `${url}#page` }, author: { '@id': person['@id'] }, publisher: { '@id': `${site.url}#beratung` }, datePublished: page.article.published, dateModified: updated, image: `${site.url}assets/${page.article.image}-1440.webp` });
   if (page.service) graph.push({ '@type': 'Service', '@id': `${url}#service`, name: page.service.name, serviceType: 'Babyschlafberatung', provider: { '@id': `${site.url}#beratung` }, areaServed: { '@type': 'Country', name: 'Deutschland' }, availableChannel: { '@type': 'ServiceChannel', name: 'Zoom und Telefon' },
@@ -80,10 +103,17 @@ function schema(file, page) {
   return JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replaceAll('<', '\\u003c');
 }
 
+function withBreadcrumb(file, page, content) {
+  if (file === 'index.html' || file === '404.html') return content;
+  const items = trail(file, page);
+  const crumbs = `<nav class="wrap breadcrumb" aria-label="Brotkrümelnavigation">${items.map(([href, name], i) => i === items.length - 1 ? `<span aria-current="page">${name}</span>` : `<a href="${href}">${name}</a><span aria-hidden="true">›</span>`).join('')}</nav>`;
+  const end = content.startsWith('<header class="page-head') ? content.indexOf('</header>') + 9 : 0;
+  return content.slice(0, end) + crumbs + content.slice(end);
+}
+
 export function layout(file, page) {
   const { title, description, label, content, noindex = false, ogImage = 'social.jpg' } = page;
   const url = pageUrl(file);
-  const current = href => href === file || (file.startsWith('baby-') && href === 'schlafwissen.html') ? ' aria-current="page"' : '';
   return `<!doctype html>
 <html lang="de">
 <head>
@@ -93,13 +123,12 @@ export function layout(file, page) {
   <meta name="description" content="${esc(description)}">
   <meta name="robots" content="${noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large'}">
   <meta name="author" content="Anna-Lena Korb">
-  <meta name="theme-color" content="#f6f1e9">
+  <meta name="theme-color" content="#ffffff">
 ${file === '404.html' ? `  <base href="${site.url}">\n` : ''}  <link rel="canonical" href="${url}">
   <link rel="alternate" hreflang="de-DE" href="${url}">
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/manrope.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/newsreader.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/site.css">
   <meta property="og:type" content="${page.article ? 'article' : 'website'}">
   <meta property="og:locale" content="de_DE">
@@ -117,8 +146,9 @@ ${file === '404.html' ? `  <base href="${site.url}">\n` : ''}  <link rel="canoni
 </head>
 <body>
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
-<header class="header"><div class="wrap nav">${brand}<button class="menu" aria-controls="navigation" aria-expanded="false" type="button" hidden><span class="menu-label">Menü</span><span class="menu-icon" aria-hidden="true"><i></i><i></i></span></button><nav class="nav-links" id="navigation" aria-label="Hauptnavigation">${navItems.map(([href, text]) => `<a href="${href}"${current(href)}>${text}</a>`).join('')}<a href="kontakt.html" class="button small nav-cta"${file === 'kontakt.html' ? ' aria-current="page"' : ''}>Kennenlernen${arrow}</a></nav></div></header>
-<main id="inhalt">${file !== 'index.html' && file !== '404.html' ? `<nav class="wrap breadcrumb" aria-label="Brotkrümelnavigation"><a href="index.html">Startseite</a><span aria-hidden="true">/</span><span aria-current="page">${label}</span></nav>` : ''}${content}</main>
-<footer class="footer"><div class="wrap"><div class="footer-lead"><p class="footer-statement">Ehrlich beraten. Mit einem Plan begleiten. <em>Nähe bewahren.</em></p></div><div class="footer-main"><div class="footer-brand">${brand}<p>Babyschlafberatung online für Familien in ganz Deutschland. Persönliche Termine in Würzburg und Umgebung nach Absprache.</p></div><div><h2>Beratung</h2>${navItems.map(([href, text]) => `<a href="${href}">${text}</a>`).join('')}<a href="kontakt.html">Termin anfragen</a></div><div><h2>Ratgeber</h2>${guideItems.map(([href, text]) => `<a href="${href}">${text}</a>`).join('')}<a href="${site.childcareUrl}" rel="noopener noreferrer">Kindertagespflege Kinderkörbchen</a></div><div><h2>Kontakt</h2><a href="mailto:${site.email}">${site.email}</a><a href="tel:${site.telephone}">${site.telephoneDisplay}</a><p>Mo–Fr 17–19 Uhr · Sa 9–13 Uhr<br>Eisingen bei Würzburg</p></div></div><div class="footer-bottom"><span>© 2026 Anna-Lena Korb</span><nav class="legal-links" aria-label="Rechtliches">${legalItems.map(([href, text]) => `<a href="${href}">${text}</a>`).join('')}</nav></div></div></footer>
+<div class="topbar"><div class="wrap topbar-inner"><p>Babyschlafberatung online in ganz Deutschland · persönlich im Raum Würzburg</p><ul><li><a href="tel:${site.telephone}">${icons.phone}${site.telephoneDisplay}</a></li><li><a href="mailto:${site.email}">${icons.mail}${site.email}</a></li><li>${icons.clock}Mo–Fr 17–19 · Sa 9–13 Uhr</li></ul></div></div>
+<header class="header"><div class="wrap nav">${brand}<button class="menu" aria-controls="navigation" aria-expanded="false" type="button" hidden><span class="menu-label">Menü</span><span class="menu-icon" aria-hidden="true"><i></i><i></i></span></button><nav class="nav-links" id="navigation" aria-label="Hauptnavigation">${navigation(file)}<a href="kontakt.html" class="button small nav-cta"${file === 'kontakt.html' ? ' aria-current="page"' : ''}>Termin anfragen</a></nav></div></header>
+<main id="inhalt">${withBreadcrumb(file, page, content)}</main>
+<footer class="footer"><div class="wrap footer-main"><div class="footer-brand">${brand}<p>Persönliche Babyschlafberatung ohne Schreienlassen. Online per Zoom und Telefon für Familien in ganz Deutschland, persönliche Termine in Würzburg und Umgebung nach Absprache.</p></div><div><h2>Schlafberatung</h2>${navItems[0][2].map(([href, text]) => `<a href="${href}">${text}</a>`).join('')}<a href="ablauf.html">Ablauf</a><a href="preise.html">Kosten</a></div><div><h2>Ratgeber</h2>${navItems[4][2].slice(1).map(([href, text]) => `<a href="${href}">${text}</a>`).join('')}<a href="fragen.html">Häufige Fragen</a><a href="ueber-mich.html">Über mich</a></div><div><h2>Kontakt</h2><address>Anna-Lena Korb<br>Müllersweg 15<br>97249 Eisingen</address><a href="tel:${site.telephone}">${site.telephoneDisplay}</a><a href="mailto:${site.email}">${site.email}</a><p>Mo–Fr 17–19 Uhr, Sa 9–13 Uhr</p></div></div><div class="footer-bottom"><div class="wrap footer-bottom-inner"><span>© 2026 Anna-Lena Korb · Babyschlafberatung</span><nav class="legal-links" aria-label="Rechtliches">${legalItems.map(([href, text]) => `<a href="${href}">${text}</a>`).join('')}</nav></div></div></footer>
 </body></html>\n`;
 }

@@ -4,7 +4,7 @@ import { pageHead, photos } from './layout.mjs';
 const address = `<address>Anna-Lena Korb<br>Babyschlafberatung<br>Müllersweg 15<br>97249 Eisingen<br>Deutschland<br><a href="mailto:${site.email}">${site.email}</a><br><a href="tel:${site.telephone}">${site.telephoneDisplay}</a></address>`;
 function legal(label, title, body) {
   return { label, title: `${title} | Anna-Lena Korb`, description: `${title} der Babyschlafberatung Anna-Lena Korb in Eisingen bei Würzburg.`, noindex: true,
-    content: `${pageHead('Informationen', title, site.name)}<article class="wrap prose legal-section">${body}<p class="small">Stand: 13. September 2026</p></article>` };
+    content: `${pageHead(title, '')}<article class="wrap prose legal-section">${body}<p class="small">Stand: 13. September 2026</p></article>` };
 }
 
 export const legalPages = {
