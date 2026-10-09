@@ -4,15 +4,41 @@ import { dateBounds, parseDate, offerById, availableTimes, validateProposals, fo
 const menu = document.querySelector('.menu');
 const navigation = document.querySelector('.nav-links');
 document.documentElement.classList.add('js');
+
+// Gentle scroll reveal. Without IntersectionObserver everything is shown at once.
+const revealables = document.querySelectorAll('[data-reveal]');
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  revealables.forEach(element => observer.observe(element));
+} else revealables.forEach(element => element.classList.add('is-visible'));
+
+const header = document.querySelector('.header');
+const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 12);
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// Highlight the current section in an article's table of contents.
+const tocLinks = [...document.querySelectorAll('.toc a')];
+if (tocLinks.length && 'IntersectionObserver' in window) {
+  const tocObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) if (entry.isIntersecting) tocLinks.forEach(a => a.classList.toggle('is-active', a.hash === `#${entry.target.id}`));
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  tocLinks.forEach(a => { const target = document.getElementById(a.hash.slice(1)); if (target) tocObserver.observe(target); });
+}
+
 menu.hidden = false;
 function closeMenu() {
   menu.setAttribute('aria-expanded', 'false');
   navigation.classList.remove('open');
+  document.body.style.overflow = '';
 }
 menu.addEventListener('click', () => {
   const open = menu.getAttribute('aria-expanded') !== 'true';
   menu.setAttribute('aria-expanded', String(open));
   navigation.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
 });
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') { closeMenu(); menu.focus(); }
