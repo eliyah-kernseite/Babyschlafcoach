@@ -16,6 +16,7 @@ for (const [filename, page] of Object.entries(all)) {
     assert.equal([...html.matchAll(/<h1\b/g)].length, 1);
     assert.match(html, /<html lang="de">/);
     assert.ok(html.includes(site.email));
+    assert.ok(html.includes('<a href="https://kernseite.com" title="Webdesign Agentur Würzburg" target="_blank" rel="noopener">KERNSEITE</a>'), 'agency credit missing');
     assert.ok(html.includes(`href="${site.url}`));
     assert.doesNotMatch(html, /annalenakorb@googlemail|anna-lena-babyschlafcoach\.de|action="api\/|449\s*(?:€|Euro)|zweifache/);
     const schema = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
