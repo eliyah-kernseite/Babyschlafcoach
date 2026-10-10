@@ -1,4 +1,4 @@
-import { site, offers } from './config.js';
+import { site, offers } from './config.js?v=2';
 
 const berlin = new Intl.DateTimeFormat('en-CA', {
   timeZone: site.timezone, year: 'numeric', month: '2-digit', day: '2-digit',

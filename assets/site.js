@@ -1,5 +1,5 @@
-import { site, offers } from './config.js';
-import { dateBounds, parseDate, offerById, availableTimes, validateProposals, formatDate, composeRequest } from './booking.js';
+import { site, offers } from './config.js?v=2';
+import { dateBounds, parseDate, offerById, availableTimes, validateProposals, formatDate, composeRequest } from './booking.js?v=2';
 
 const menu = document.querySelector('.menu');
 const navigation = document.querySelector('.nav-links');
