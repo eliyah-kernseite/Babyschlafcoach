@@ -1,12 +1,14 @@
 <?php
 declare(strict_types=1);
+// Nimmt die Terminanfrage aus kontakt.html entgegen und schickt sie per E-Mail an Anna-Lena.
+// Der Browser holt zuerst per GET ein Formular-Token und sendet die Anfrage dann per POST.
 use PHPMailer\PHPMailer\PHPMailer;
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store, max-age=0');
 header('X-Content-Type-Options: nosniff');
 header('X-Robots-Tag: noindex, nofollow');
 function answer(int $code, array $data): never { http_response_code($code); echo json_encode($data, JSON_UNESCAPED_UNICODE); exit; }
-set_exception_handler(function(Throwable $e): void { answer(503, ['ok'=>false,'message'=>'Der Versand ist gerade nicht möglich. Bitte schreibe an annalenakorb@googlemail.com. Deine Eingaben bleiben erhalten.']); });
+set_exception_handler(function(Throwable $e): void { error_log('contact.php: '.$e->getMessage()); answer(503, ['ok'=>false,'message'=>'Der Versand ist gerade nicht möglich.']); });
 $cfg = require dirname(__DIR__).'/private/config.php';
 $method = $_SERVER['REQUEST_METHOD'] ?? '';
 if (!in_array($method, ['GET','POST'], true)) { header('Allow: GET, POST'); answer(405,['ok'=>false,'message'=>'Diese Anfrage wird nicht unterstützt.']); }
@@ -23,13 +25,33 @@ if ($method==='GET') {
     answer(200,['ok'=>true,'token'=>$_SESSION['token']]);
 }
 $token=$_POST['token']??'';
-if (!is_string($token) || !isset($_SESSION['token']) || !hash_equals($_SESSION['token'],$token) || time()-(int)($_SESSION['created']??0)>7200) answer(403,['ok'=>false,'message'=>'Das Formular war zu lange geöffnet. Bitte sende deine Nachricht erneut.']);
-$fields=['name','email','message','interest','website'];
-foreach($fields as $field) if(isset($_POST[$field])&&!is_string($_POST[$field])) answer(422,['ok'=>false,'message'=>'Bitte überprüfe deine Eingaben.']);
-if (trim($_POST['website']??'')!=='') answer(422,['ok'=>false,'message'=>'Die Anfrage konnte nicht verarbeitet werden. Bitte nutze E-Mail.']);
-$name=trim($_POST['name']??'');$email=trim($_POST['email']??'');$message=trim($_POST['message']??'');$interest=trim($_POST['interest']??'Kennenlernen');
-if (strlen($name)<2 || strlen($name)>400 || strlen($email)>254 || !filter_var($email,FILTER_VALIDATE_EMAIL) || preg_match('/[\r\n\x00]/',$email.$name) || strlen($message)<10 || strlen($message)>16000 || !preg_match('//u',$message.$name)) answer(422,['ok'=>false,'message'=>'Bitte prüfe Name, E-Mail-Adresse und Nachricht (mindestens 10 Zeichen).']);
-if(!in_array($interest,['Kennenlernen','Basis','Intensiv','Premium','Frage'],true)) answer(422,['ok'=>false,'message'=>'Bitte wähle ein Angebot aus der Liste.']);
+if (!is_string($token) || !isset($_SESSION['token']) || !hash_equals($_SESSION['token'],$token) || time()-(int)($_SESSION['created']??0)>7200) answer(403,['ok'=>false,'message'=>'Das Formular war zu lange geöffnet. Bitte lade die Seite neu und sende die Anfrage erneut.']);
+foreach(['name','email','message','interest','format','proposals','website'] as $field) if(isset($_POST[$field])&&!is_string($_POST[$field])) answer(422,['ok'=>false,'message'=>'Bitte überprüfe deine Eingaben.']);
+if (trim($_POST['website']??'')!=='') answer(422,['ok'=>false,'message'=>'Die Anfrage konnte nicht verarbeitet werden.']);
+
+// Gleiche Angebote, Dauer und Gesprächszeiten wie assets/config.js.
+$offers=['Kennenlernen'=>['Kostenloses Kennenlernen',0,20],'Sprechstunde'=>['Schlafsprechstunde',89,45],'Basis'=>['Basis',149,60],'Intensiv'=>['Intensiv',299,60],'Premium'=>['Premium',479,60]];
+$hours=[1=>[1020,1140],2=>[1020,1140],3=>[1020,1140],4=>[1020,1140],5=>[1020,1140],6=>[540,780]];
+$name=trim($_POST['name']??'');$email=trim($_POST['email']??'');$message=trim($_POST['message']??'');$interest=$_POST['interest']??'';$format=$_POST['format']??'';
+if (mb_strlen($name)<2 || mb_strlen($name)>100 || strlen($email)>254 || !filter_var($email,FILTER_VALIDATE_EMAIL) || preg_match('/[\r\n\x00]/',$email.$name) || mb_strlen($message)>1200 || !preg_match('//u',$message.$name)) answer(422,['ok'=>false,'message'=>'Bitte prüfe Name, E-Mail-Adresse und Nachricht.']);
+if (!isset($offers[$interest]) || !in_array($format,['Zoom','Telefon'],true)) answer(422,['ok'=>false,'message'=>'Bitte wähle ein Angebot und ein Gesprächsformat aus der Liste.']);
+[$offerName,$price,$minutes]=$offers[$interest];
+$proposals=json_decode($_POST['proposals']??'',true);
+$tz=new DateTimeZone('Europe/Berlin');
+// Einen Tag Spielraum gegenueber dem Browser, damit eine Anfrage kurz vor Mitternacht nicht scheitert.
+$min=(new DateTimeImmutable('today',$tz))->modify('+6 days')->format('Y-m-d');
+$max=(new DateTimeImmutable('today',$tz))->modify('+91 days')->format('Y-m-d');
+$days=['So.','Mo.','Di.','Mi.','Do.','Fr.','Sa.'];$lines=[];$seen=[];
+if (!is_array($proposals) || !array_is_list($proposals) || count($proposals)<1 || count($proposals)>3) answer(422,['ok'=>false,'message'=>'Bitte wähle ein bis drei Wunschzeiten.']);
+foreach($proposals as $i=>$p){
+    $date=is_array($p)?($p['date']??null):null;$time=is_array($p)?($p['time']??null):null;
+    $d=is_string($date)&&preg_match('/^\d{4}-\d{2}-\d{2}$/',$date)?DateTimeImmutable::createFromFormat('!Y-m-d',$date,$tz):false;
+    $ok=$d&&$d->format('Y-m-d')===$date&&$date>=$min&&$date<=$max&&is_string($time)&&preg_match('/^(\d{2}):(\d{2})$/',$time,$m)&&!isset($seen[$date.$time]);
+    $w=$ok?(int)$d->format('w'):0;$t=$ok?(int)$m[1]*60+(int)$m[2]:0;
+    if(!$ok||!isset($hours[$w])||$t%30!==0||$t<$hours[$w][0]||$t+$minutes>$hours[$w][1]) answer(422,['ok'=>false,'message'=>'Bitte wähle gültige Wunschzeiten mit mindestens sieben Tagen Vorlauf.']);
+    $seen[$date.$time]=true;$lines[]=($i+1).'. '.$days[$w].', '.$d->format('d.m.Y').', '.$time.' Uhr';
+}
+
 // Rate records contain no message content and no raw IP. Daily key rotates.
 $private=dirname(__DIR__).'/private';
 $saltFile=$private.'/rate-secret.php';
@@ -42,6 +64,7 @@ $rateFile=$rateDir.'/'.$key.'.json';$handle=fopen($rateFile,'c+');if(!$handle||!
 $times=json_decode(stream_get_contents($handle),true);$times=is_array($times)?array_values(array_filter($times,fn($t)=>is_int($t)&&$t>time()-3600)):[];
 if(count($times)>=5){flock($handle,LOCK_UN);fclose($handle);header('Retry-After: 3600');answer(429,['ok'=>false,'message'=>'Es wurden mehrere Anfragen gesendet. Bitte versuche es später erneut oder schreibe direkt per E-Mail.']);}
 $times[]=time();ftruncate($handle,0);rewind($handle);fwrite($handle,json_encode($times));fflush($handle);flock($handle,LOCK_UN);fclose($handle);
+
 require dirname(__DIR__).'/vendor/phpmailer/Exception.php';
 require dirname(__DIR__).'/vendor/phpmailer/PHPMailer.php';
 require dirname(__DIR__).'/vendor/phpmailer/SMTP.php';
@@ -51,8 +74,14 @@ if($cfg['transport']==='smtp'){
     $mail->isSMTP();$mail->Host=$cfg['smtp_host'];$mail->Port=(int)$cfg['smtp_port'];$mail->SMTPAuth=true;$mail->Username=$cfg['smtp_username'];$mail->Password=$cfg['smtp_password'];$mail->SMTPSecure=$cfg['smtp_security'];
 }else{$mail->isMail();}
 $mail->setFrom($cfg['from_email'],$cfg['from_name']);$mail->addAddress($cfg['recipient']);$mail->addReplyTo($email,$name);
-$mail->Subject='Neue Website-Anfrage: '.$interest;
-$mail->Body="Unverbindliche Website-Anfrage\n\nName: $name\nE-Mail: $email\nInteresse: $interest\n\n$message\n\nEingang (UTC): ".gmdate('Y-m-d H:i:s');
+$mail->Subject='Terminanfrage: '.$offerName.' von '.$name;
+$mail->Body=implode("\n",array_merge([
+    'Neue Terminanfrage über babyschlaf-coach.de','',
+    'Angebot: '.$offerName.($price?" ($price Euro)":' (kostenlos)'),
+    'Name: '.$name,'E-Mail: '.$email,'Gespräch: '.$format,'',
+    'Wunschtermine (deutsche Ortszeit):'],$lines,[''],
+    $message!==''?['Nachricht:',$message,'']:[],
+    ['Mit "Antworten" schreibst du direkt an '.$email.'.','Eingang: '.(new DateTimeImmutable('now',$tz))->format('d.m.Y H:i').' Uhr']));
 $mail->send();
 unset($_SESSION['token'],$_SESSION['created']);
-answer(200,['ok'=>true,'message'=>'Danke für deine Nachricht. Sie wurde zum Versand angenommen. Ich melde mich per E-Mail bei dir.']);
+answer(200,['ok'=>true]);

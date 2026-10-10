@@ -45,7 +45,9 @@ test('Sitemap contains indexable pages only and current base URL', async () => {
 test('No active trackers, external image/font requests or data persistence', async () => {
   const js = await readFile(path.join(root,'assets/site.js'), 'utf8');
   const css = await readFile(path.join(root,'assets/site.css'), 'utf8');
-  assert.doesNotMatch(js, /fetch\(|XMLHttpRequest|localStorage|sessionStorage|document\.cookie|\.innerHTML/);
+  assert.doesNotMatch(js, /XMLHttpRequest|localStorage|sessionStorage|document\.cookie|\.innerHTML/);
+  // Only the own form endpoint on the same server is contacted.
+  for (const [, target] of js.matchAll(/fetch\(([^,)]+)/g)) assert.equal(target, "'api/contact.php'");
   assert.doesNotMatch(css, /@import|url\(['"]?https:/);
   assert.match(css, /prefers-reduced-motion/);
 });

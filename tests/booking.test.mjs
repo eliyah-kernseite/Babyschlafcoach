@@ -5,7 +5,7 @@ import { site, offers } from '../assets/config.js';
 
 const sunday = new Date('2026-09-13T08:00:00Z');
 test('Confirmed email, price ladder and appointment lengths', () => {
-  assert.equal(site.email, 'babyschlafberatung.annalena@gmail.com');
+  assert.equal(site.email, 'babyschlafcoach.annalena@gmail.com');
   assert.deepEqual(offers.map(o => o.price), [0, 89, 149, 299, 479]);
   assert.deepEqual(offers.map(o => o.minutes), [20, 45, 60, 60, 60]);
 });

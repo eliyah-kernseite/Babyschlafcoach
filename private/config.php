@@ -1,16 +1,17 @@
 <?php
 declare(strict_types=1);
-// Hostinger: preferably use SMTP with an existing mailbox on your own domain.
-// Never place passwords into HTML or JavaScript. This directory is denied by .htaccess.
+// Konfiguration fuer api/contact.php. Dieses Verzeichnis ist per .htaccess gesperrt.
+// Keine Passwoerter eintragen: die Datei liegt im Git-Repository.
+// Absender muss ein bei Hostinger angelegtes Postfach dieser Domain sein (hPanel > E-Mails).
 return [
-    'recipient' => 'annalenakorb@googlemail.com',
-    'from_email' => 'kontakt@anna-lena-babyschlafcoach.de',
-    'from_name' => 'Anna-Lena Korb Website',
-    'transport' => 'mail', // Set to smtp after entering the mailbox credentials.
+    'recipient' => 'babyschlafcoach.annalena@gmail.com',
+    'from_email' => 'kontakt@babyschlaf-coach.de',
+    'from_name' => 'Website babyschlaf-coach.de',
+    'transport' => 'mail',
     'smtp_host' => 'smtp.hostinger.com',
     'smtp_port' => 465,
     'smtp_security' => 'ssl',
     'smtp_username' => '',
     'smtp_password' => '',
-    'origins' => ['https://www.anna-lena-babyschlafcoach.de', 'https://anna-lena-babyschlafcoach.de'],
+    'origins' => ['https://babyschlaf-coach.de', 'https://www.babyschlaf-coach.de'],
 ];
