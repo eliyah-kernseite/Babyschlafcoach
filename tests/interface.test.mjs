@@ -70,12 +70,43 @@ test('Sprechstunde removes late starts and forces Zoom', () => {
   assert.equal(doc.querySelector('#format').options[1].disabled,true);
   assert.equal(doc.querySelectorAll('#proposal-list li').length,0); dom.window.close();
 });
-test('Empty request is rejected; full request creates an unsent, editable draft', () => {
+const settle = () => new Promise(resolve => setTimeout(resolve, 20));
+test('Request is sent to the own server and confirms delivery', async () => {
+  const {dom,doc,select,submit}=boot('?paket=Basis');
+  const calls=[];
+  dom.window.fetch=async (url, options={}) => {
+    calls.push({url, options});
+    if (!options.method) return {ok:true,status:200,json:async()=>({ok:true,token:'abc'})};
+    return {ok:true,status:200,json:async()=>({ok:true})};
+  };
+  select(); submit(); await settle();
+  assert.equal(calls.length,2);
+  assert.ok(calls.every(c => c.url==='api/contact.php'));
+  const body=calls[1].options.body;
+  assert.equal(body.get('token'),'abc');
+  assert.equal(body.get('interest'),'Basis');
+  assert.equal(body.get('email'),'test@example.invalid');
+  assert.equal(JSON.parse(body.get('proposals')).length,1);
+  assert.equal(doc.querySelector('#request-sent').hidden,false);
+  assert.equal(doc.querySelector('#booking-form').hidden,true);
+  assert.equal(doc.querySelector('#request-result').hidden,true);
+  assert.equal(doc.activeElement.id,'sent-title'); dom.window.close();
+});
+test('Server validation message stays on the form', async () => {
+  const {dom,doc,select,submit}=boot();
+  dom.window.fetch=async (url, options={}) => options.method ? {ok:false,status:422,json:async()=>({ok:false,message:'Bitte prüfe Name.'})} : {ok:true,status:200,json:async()=>({ok:true,token:'abc'})};
+  select(); submit(); await settle();
+  assert.equal(doc.querySelector('#booking-form').hidden,false);
+  assert.equal(doc.querySelector('#booking-status').textContent,'Bitte prüfe Name.');
+  assert.equal(doc.querySelector('#booking-form button[type="submit"]').disabled,false); dom.window.close();
+});
+test('Empty request is rejected; failed sending falls back to an editable draft', async () => {
   const {dom,doc,select,submit}=boot('?paket=Premium');
+  dom.window.fetch=async () => { throw new TypeError('offline'); };
   assert.equal(doc.querySelector('#interest').value,'Premium'); submit();
   assert.equal(doc.querySelector('#request-result').hidden,true);
   assert.match(doc.querySelector('#booking-status').textContent,/ein bis drei/);
-  select(); submit();
+  select(); submit(); await settle();
   assert.equal(doc.querySelector('#request-result').hidden,false);
   assert.equal(doc.querySelector('#booking-form').hidden,true);
   assert.equal(doc.activeElement.id,'result-title');
@@ -85,7 +116,8 @@ test('Empty request is rejected; full request creates an unsent, editable draft'
   assert.equal(gmail.searchParams.get('to'),site.email);
   assert.equal(gmail.searchParams.get('body'),mail.searchParams.get('body'));
   assert.match(doc.querySelector('#request-preview').value,/479 Euro/);
-  assert.match(doc.querySelector('#request-result').textContent,/Noch nicht versendet/);
+  assert.match(doc.querySelector('#request-result').textContent,/nicht geklappt/);
+  assert.equal(doc.querySelector('#request-sent').hidden,true);
   doc.querySelector('#edit-request').click();
   assert.equal(doc.querySelector('#booking-form').hidden,false);
   assert.equal(doc.querySelectorAll('#proposal-list li').length,1); dom.window.close();

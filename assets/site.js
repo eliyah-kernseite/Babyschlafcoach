@@ -61,6 +61,7 @@ if (booking) {
   const selectionStatus = document.querySelector('#selection-status');
   const status = document.querySelector('#booking-status');
   const result = document.querySelector('#request-result');
+  const sent = document.querySelector('#request-sent');
   let proposals = [];
   let selectedDate = '';
   let displayedMonth = dateBounds().min.slice(0, 7);
@@ -161,7 +162,7 @@ if (booking) {
     renderDays(); renderTimes(); renderProposals();
     if (before !== proposals.length) selectionStatus.textContent = 'Nicht mehr passende Zeiten wurden entfernt, weil dieses Gespräch länger dauert. Bitte ergänze neue Wunschzeiten.';
   });
-  form.addEventListener('submit', event => {
+  form.addEventListener('submit', async event => {
     event.preventDefault();
     if (!form.reportValidity()) return;
     if (!validateProposals(proposals, interest.value)) {
@@ -172,16 +173,39 @@ if (booking) {
     if (name.length < 2 || /[\r\n]/.test(name)) {
       status.textContent = 'Bitte gib deinen Namen ein.'; form.elements.name.focus(); return;
     }
-    const request = composeRequest({ name, email: form.elements.email.value, interest: interest.value, format: format.value, message: form.elements.message.value, proposals });
+    const button = form.querySelector('button[type="submit"]');
+    button.disabled = true; status.textContent = 'Deine Anfrage wird gesendet …';
+    const showFallback = () => {
+      const request = composeRequest({ name, email: form.elements.email.value, interest: interest.value, format: format.value, message: form.elements.message.value, proposals });
+      prepareDraft(request);
+    };
+    try {
+      const tokenResponse = await fetch('api/contact.php', { credentials: 'same-origin', cache: 'no-store' });
+      const { token } = await tokenResponse.json();
+      if (!tokenResponse.ok || !token) throw new Error('token');
+      const data = new FormData(form);
+      data.set('name', name); data.set('token', token); data.set('proposals', JSON.stringify(proposals));
+      const response = await fetch('api/contact.php', { method: 'POST', body: data, credentials: 'same-origin' });
+      const answer = await response.json().catch(() => ({}));
+      if (response.ok && answer.ok) {
+        status.textContent = ''; form.hidden = true; sent.hidden = false;
+        document.querySelector('#sent-title').focus();
+      } else if ([403, 413, 422, 429].includes(response.status) && answer.message) {
+        status.textContent = answer.message; status.focus();
+      } else showFallback();
+    } catch { showFallback(); }
+    finally { button.disabled = false; }
+  });
+  function prepareDraft(request) {
     document.querySelector('#request-preview').value = `An: ${site.email}\nBetreff: ${request.subject}\n\n${request.body}`;
     document.querySelector('#open-mail').href = request.mailto;
     const gmail = new URL('https://mail.google.com/mail/');
     gmail.search = new URLSearchParams({ view: 'cm', fs: '1', to: site.email, su: request.subject, body: request.body }).toString();
     document.querySelector('#open-gmail').href = gmail.href;
-    form.hidden = true; result.hidden = false;
+    status.textContent = ''; form.hidden = true; result.hidden = false;
     document.querySelector('#copy-status').textContent = '';
     document.querySelector('#result-title').focus();
-  });
+  }
   document.querySelector('#edit-request').addEventListener('click', () => {
     result.hidden = true; form.hidden = false; interest.focus();
   });

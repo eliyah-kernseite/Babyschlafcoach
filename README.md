@@ -29,7 +29,9 @@ main, Repository-Wurzel. Änderungen auf einem anderen Branch sind noch nicht li
 | src/layout.mjs | Navigation, Footer, Metadaten, strukturierte Daten (FAQ, Breadcrumb, Service, Artikel), Fotoliste, Porträt-Karte |
 | src/legal.mjs | Impressum, Datenschutz, AGB, Widerruf, Zugänglichkeit, Bildnachweise |
 | assets/config.js | Öffentliche E-Mail, Telefonnummer, Basis-URL, Zeiten, Preise |
-| assets/booking.js | Reine Kalenderlogik, Datum, Dauer, Anfragevorbereitung |
+| assets/booking.js | Reine Kalenderlogik, Datum, Dauer, Ersatz-Entwurf |
+| api/contact.php | Nimmt die Terminanfrage an und verschickt sie per E-Mail |
+| private/config.php | Empfänger und Absender für api/contact.php (ohne Passwörter) |
 | assets/site.js | Menü, Scroll-Animationen, Inhaltsverzeichnis, interaktive Terminanfrage |
 | assets/site.css | Gestaltung (Newsreader + Manrope), responsiv, Motion, reduzierte Bewegung |
 | scripts/build.mjs | Reproduzierbarer Bau der 16 HTML-Seiten, Sitemap, robots.txt |
@@ -43,19 +45,20 @@ main, Repository-Wurzel. Änderungen auf einem anderen Branch sind noch nicht li
 2. Ein bis drei Wunschzeiten wählen: Mo–Fr 17–19 Uhr, Sa 9–13 Uhr, Sonntag geschlossen.
 3. Mindestens sieben lokale Kalendertage Vorlauf; am ersten Tag frühestens zur
    aktuellen deutschen Uhrzeit. Anfragen bis 90 Tage voraus. Zeitzone Europe/Berlin.
-4. Kontaktdaten ergänzen und **Anfrage als E-Mail vorbereiten**.
-5. Entwurf im eigenen Mailprogramm oder Gmail öffnen und **dort selbst absenden**.
-   Alternativ Text kopieren. Anna-Lena bestätigt anschließend einen Termin.
+4. Kontaktdaten ergänzen und **Anfrage senden**. Der Browser schickt die Anfrage an
+   api/contact.php; der Server prüft sie und verschickt sie per PHP mail() an die
+   Empfängeradresse aus private/config.php (Absender kontakt@babyschlaf-coach.de,
+   Antworten gehen direkt an die anfragende Person).
+5. Klappt der Versand nicht (Server nicht erreichbar, Mailversand gestört), zeigt die
+   Seite den bisherigen Weg: Entwurf im Mailprogramm oder Gmail öffnen oder kopieren.
 
-Das ist eine funktionierende **Terminanfrage**, kein angebundener Echtzeitkalender.
-Es gibt keinen Verfügbarkeitsabgleich, keine automatischen Bestätigungen,
-keine Reservierung, keine Bezahlung und keine automatische E-Mail-Zustellung.
+Voraussetzung auf Hostinger: Das Postfach **kontakt@babyschlaf-coach.de** muss im
+hPanel unter E-Mails angelegt sein, sonst nimmt Hostinger mail() nicht an bzw.
+Gmail sortiert die Nachricht aus (SPF/DKIM richtet Hostinger dabei selbst ein).
+
+Das ist eine **Terminanfrage**, kein angebundener Echtzeitkalender: kein
+Verfügbarkeitsabgleich, keine Reservierung, keine Bezahlung.
 Ohne JavaScript bleiben E-Mail, Telefon und alle Informationsseiten nutzbar.
-Der Kalender benötigt kein zusätzliches Konto und lädt keine externen Dienste.
-Die Gmail-Schaltfläche überträgt den Entwurf erst beim Anklicken an Google.
-
-Wenn später echte Direktbuchung gewünscht ist, einen geeigneten Dienst oder
-Backend ergänzen und Datenschutz, Verfügbarkeitslogik und End-to-End-Test anpassen.
 Niemals Zugangsdaten in assets/config.js oder andere öffentliche Dateien setzen.
 
 ## Fotos und Zertifikat

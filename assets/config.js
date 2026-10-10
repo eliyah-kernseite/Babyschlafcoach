@@ -2,7 +2,7 @@
 export const site = Object.freeze({
   name: 'Babyschlafberatung Anna-Lena Korb',
   url: 'https://babyschlaf-coach.de/',
-  email: 'babyschlafberatung.annalena@gmail.com',
+  email: 'babyschlafcoach.annalena@gmail.com',
   telephone: '+491732584141',
   telephoneDisplay: '0173 2584141',
   childcareUrl: 'https://xn--kinderkrbchen-omb.com/',

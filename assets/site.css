@@ -389,7 +389,7 @@ input::placeholder,textarea::placeholder{color:#7a7065}
 .request-result label{margin-top:24px}
 .request-result textarea{font-size:.85rem;line-height:1.7}
 .request-result .actions{margin-top:22px;gap:12px}
-.result-note{font-size:.85rem;font-weight:700;color:var(--accent);margin-bottom:8px}
+.hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 .request-result textarea{font-size:.85rem;line-height:1.7}
 .request-result .actions{margin-top:22px;gap:12px}
 .request-result .actions>.button{width:100%}
