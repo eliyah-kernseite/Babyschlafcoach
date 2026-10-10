@@ -92,6 +92,7 @@ test('Request is sent to the form service and confirms delivery', async () => {
 });
 test('Without a form key no request leaves the browser', async () => {
   const {dom,doc,select,submit}=boot();
+  dom.window.site={...site, formKey:''};
   let called=false; dom.window.fetch=async () => { called=true; };
   select(); submit(); await settle();
   assert.equal(called,false);
