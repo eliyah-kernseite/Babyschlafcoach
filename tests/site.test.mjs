@@ -46,8 +46,8 @@ test('No active trackers, external image/font requests or data persistence', asy
   const js = await readFile(path.join(root,'assets/site.js'), 'utf8');
   const css = await readFile(path.join(root,'assets/site.css'), 'utf8');
   assert.doesNotMatch(js, /XMLHttpRequest|localStorage|sessionStorage|document\.cookie|\.innerHTML/);
-  // Only the own form endpoint on the same server is contacted.
-  for (const [, target] of js.matchAll(/fetch\(([^,)]+)/g)) assert.equal(target, "'api/contact.php'");
+  // Only the form service is contacted, and only when a request is sent.
+  for (const [, target] of js.matchAll(/fetch\(([^,)]+)/g)) assert.equal(target, "'https://api.web3forms.com/submit'");
   assert.doesNotMatch(css, /@import|url\(['"]?https:/);
   assert.match(css, /prefers-reduced-motion/);
 });
