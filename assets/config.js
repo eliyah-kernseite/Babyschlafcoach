@@ -3,6 +3,8 @@ export const site = Object.freeze({
   name: 'Babyschlafberatung Anna-Lena Korb',
   url: 'https://babyschlaf-coach.de/',
   email: 'babyschlafcoach.annalena@gmail.com',
+  // Web3Forms access key: public by design, only allows sending to the verified address above.
+  formKey: '',
   telephone: '+491732584141',
   telephoneDisplay: '0173 2584141',
   childcareUrl: 'https://xn--kinderkrbchen-omb.com/',

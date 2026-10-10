@@ -30,8 +30,6 @@ main, Repository-Wurzel. Änderungen auf einem anderen Branch sind noch nicht li
 | src/legal.mjs | Impressum, Datenschutz, AGB, Widerruf, Zugänglichkeit, Bildnachweise |
 | assets/config.js | Öffentliche E-Mail, Telefonnummer, Basis-URL, Zeiten, Preise |
 | assets/booking.js | Reine Kalenderlogik, Datum, Dauer, Ersatz-Entwurf |
-| api/contact.php | Nimmt die Terminanfrage an und verschickt sie per E-Mail |
-| private/config.php | Empfänger und Absender für api/contact.php (ohne Passwörter) |
 | assets/site.js | Menü, Scroll-Animationen, Inhaltsverzeichnis, interaktive Terminanfrage |
 | assets/site.css | Gestaltung (Newsreader + Manrope), responsiv, Motion, reduzierte Bewegung |
 | scripts/build.mjs | Reproduzierbarer Bau der 16 HTML-Seiten, Sitemap, robots.txt |
@@ -46,15 +44,12 @@ main, Repository-Wurzel. Änderungen auf einem anderen Branch sind noch nicht li
 3. Mindestens sieben lokale Kalendertage Vorlauf; am ersten Tag frühestens zur
    aktuellen deutschen Uhrzeit. Anfragen bis 90 Tage voraus. Zeitzone Europe/Berlin.
 4. Kontaktdaten ergänzen und **Anfrage senden**. Der Browser schickt die Anfrage an
-   api/contact.php; der Server prüft sie und verschickt sie per PHP mail() an die
-   Empfängeradresse aus private/config.php (Absender kontakt@babyschlaf-coach.de,
-   Antworten gehen direkt an die anfragende Person).
-5. Klappt der Versand nicht (Server nicht erreichbar, Mailversand gestört), zeigt die
-   Seite den bisherigen Weg: Entwurf im Mailprogramm oder Gmail öffnen oder kopieren.
-
-Voraussetzung auf Hostinger: Das Postfach **kontakt@babyschlaf-coach.de** muss im
-hPanel unter E-Mails angelegt sein, sonst nimmt Hostinger mail() nicht an bzw.
-Gmail sortiert die Nachricht aus (SPF/DKIM richtet Hostinger dabei selbst ein).
+   Web3Forms (api.web3forms.com), das sie per E-Mail an Anna-Lenas Gmail-Adresse
+   weiterleitet. Der Zugangsschlüssel steht als `formKey` in assets/config.js; er ist
+   öffentlich gedacht und erlaubt nur den Versand an die bei Web3Forms bestätigte Adresse.
+   In Web3Forms die Aufbewahrung auf 7 Tage stellen (so steht es im Datenschutz).
+5. Ist kein `formKey` gesetzt oder klappt der Versand nicht, zeigt die Seite den
+   E-Mail-Entwurf: im Mailprogramm oder Gmail öffnen oder Text kopieren.
 
 Das ist eine **Terminanfrage**, kein angebundener Echtzeitkalender: kein
 Verfügbarkeitsabgleich, keine Reservierung, keine Bezahlung.

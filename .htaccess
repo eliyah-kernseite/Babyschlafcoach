@@ -3,7 +3,7 @@
 Options -Indexes
 ErrorDocument 404 /404.html
 
-# Interne Verzeichnisse nicht ausliefern. contact.php liest sie weiterhin ueber das Dateisystem.
+# Interne Verzeichnisse nicht ausliefern.
 <IfModule mod_alias.c>
   RedirectMatch 404 ^/private/
   RedirectMatch 404 ^/vendor/

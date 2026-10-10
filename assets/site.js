@@ -173,27 +173,21 @@ if (booking) {
     if (name.length < 2 || /[\r\n]/.test(name)) {
       status.textContent = 'Bitte gib deinen Namen ein.'; form.elements.name.focus(); return;
     }
+    const request = composeRequest({ name, email: form.elements.email.value, interest: interest.value, format: format.value, message: form.elements.message.value, proposals });
+    // Without a form key, or if sending fails, the visitor gets the email draft instead.
+    if (!site.formKey) return prepareDraft(request);
     const button = form.querySelector('button[type="submit"]');
     button.disabled = true; status.textContent = 'Deine Anfrage wird gesendet …';
-    const showFallback = () => {
-      const request = composeRequest({ name, email: form.elements.email.value, interest: interest.value, format: format.value, message: form.elements.message.value, proposals });
-      prepareDraft(request);
-    };
     try {
-      const tokenResponse = await fetch('api/contact.php', { credentials: 'same-origin', cache: 'no-store' });
-      const { token } = await tokenResponse.json();
-      if (!tokenResponse.ok || !token) throw new Error('token');
-      const data = new FormData(form);
-      data.set('name', name); data.set('token', token); data.set('proposals', JSON.stringify(proposals));
-      const response = await fetch('api/contact.php', { method: 'POST', body: data, credentials: 'same-origin' });
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ access_key: site.formKey, subject: `${request.subject} von ${name}`, from_name: 'Website babyschlaf-coach.de', name, email: form.elements.email.value.trim(), message: request.body, botcheck: form.elements.website.value }),
+      });
       const answer = await response.json().catch(() => ({}));
-      if (response.ok && answer.ok) {
-        status.textContent = ''; form.hidden = true; sent.hidden = false;
-        document.querySelector('#sent-title').focus();
-      } else if ([403, 413, 422, 429].includes(response.status) && answer.message) {
-        status.textContent = answer.message; status.focus();
-      } else showFallback();
-    } catch { showFallback(); }
+      if (!response.ok || !answer.success) throw new Error('not sent');
+      status.textContent = ''; form.hidden = true; sent.hidden = false;
+      document.querySelector('#sent-title').focus();
+    } catch { prepareDraft(request); }
     finally { button.disabled = false; }
   });
   function prepareDraft(request) {

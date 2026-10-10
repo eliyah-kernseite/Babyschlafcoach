@@ -71,37 +71,35 @@ test('Sprechstunde removes late starts and forces Zoom', () => {
   assert.equal(doc.querySelectorAll('#proposal-list li').length,0); dom.window.close();
 });
 const settle = () => new Promise(resolve => setTimeout(resolve, 20));
-test('Request is sent to the own server and confirms delivery', async () => {
+test('Request is sent to the form service and confirms delivery', async () => {
   const {dom,doc,select,submit}=boot('?paket=Basis');
   const calls=[];
-  dom.window.fetch=async (url, options={}) => {
-    calls.push({url, options});
-    if (!options.method) return {ok:true,status:200,json:async()=>({ok:true,token:'abc'})};
-    return {ok:true,status:200,json:async()=>({ok:true})};
-  };
+  dom.window.site={...site, formKey:'test-key'};
+  dom.window.fetch=async (url, options={}) => { calls.push({url, options}); return {ok:true,status:200,json:async()=>({success:true})}; };
   select(); submit(); await settle();
-  assert.equal(calls.length,2);
-  assert.ok(calls.every(c => c.url==='api/contact.php'));
-  const body=calls[1].options.body;
-  assert.equal(body.get('token'),'abc');
-  assert.equal(body.get('interest'),'Basis');
-  assert.equal(body.get('email'),'test@example.invalid');
-  assert.equal(JSON.parse(body.get('proposals')).length,1);
+  assert.equal(calls.length,1);
+  assert.equal(calls[0].url,'https://api.web3forms.com/submit');
+  const body=JSON.parse(calls[0].options.body);
+  assert.equal(body.access_key,'test-key');
+  assert.equal(body.email,'test@example.invalid');
+  assert.equal(body.botcheck,'');
+  assert.match(body.subject,/Basis von Test Familie/);
+  assert.match(body.message,/149 Euro/);
   assert.equal(doc.querySelector('#request-sent').hidden,false);
   assert.equal(doc.querySelector('#booking-form').hidden,true);
   assert.equal(doc.querySelector('#request-result').hidden,true);
   assert.equal(doc.activeElement.id,'sent-title'); dom.window.close();
 });
-test('Server validation message stays on the form', async () => {
+test('Without a form key no request leaves the browser', async () => {
   const {dom,doc,select,submit}=boot();
-  dom.window.fetch=async (url, options={}) => options.method ? {ok:false,status:422,json:async()=>({ok:false,message:'Bitte prüfe Name.'})} : {ok:true,status:200,json:async()=>({ok:true,token:'abc'})};
+  let called=false; dom.window.fetch=async () => { called=true; };
   select(); submit(); await settle();
-  assert.equal(doc.querySelector('#booking-form').hidden,false);
-  assert.equal(doc.querySelector('#booking-status').textContent,'Bitte prüfe Name.');
-  assert.equal(doc.querySelector('#booking-form button[type="submit"]').disabled,false); dom.window.close();
+  assert.equal(called,false);
+  assert.equal(doc.querySelector('#request-result').hidden,false); dom.window.close();
 });
 test('Empty request is rejected; failed sending falls back to an editable draft', async () => {
   const {dom,doc,select,submit}=boot('?paket=Premium');
+  dom.window.site={...site, formKey:'test-key'};
   dom.window.fetch=async () => { throw new TypeError('offline'); };
   assert.equal(doc.querySelector('#interest').value,'Premium'); submit();
   assert.equal(doc.querySelector('#request-result').hidden,true);
