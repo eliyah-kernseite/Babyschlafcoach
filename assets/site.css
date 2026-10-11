@@ -448,13 +448,13 @@ address{font-style:normal;overflow-wrap:anywhere}
   .menu{display:inline-flex}
   .nav{min-height:76px}
   .nav-links{position:fixed;inset:76px 0 auto 0;height:calc(100dvh - 76px);background:#fff;flex-direction:column;align-items:stretch;gap:0;padding:8px var(--gutter) 40px;overflow-y:auto;border-top:1px solid var(--line)}
-  .js .nav-links{visibility:hidden;opacity:0;transform:translateY(-8px);transition:opacity .3s var(--ease),transform .3s var(--ease),visibility 0s .3s}
-  .js .nav-links.open{visibility:visible;opacity:1;transform:none;transition:opacity .3s var(--ease),transform .3s var(--ease)}
+  .js .nav-links{visibility:hidden;pointer-events:none;opacity:0;transform:translateY(-8px);transition:opacity .3s var(--ease),transform .3s var(--ease),visibility 0s .3s}
+  .js .nav-links.open{visibility:visible;pointer-events:auto;opacity:1;transform:none;transition:opacity .3s var(--ease),transform .3s var(--ease)}
   html:not(.js) .nav-links{position:static;height:auto;border:0;padding:0 0 16px}
   html:not(.js) .nav{flex-wrap:wrap}
   .nav-item{font-size:1.15rem;padding:16px 0;border-bottom:1px solid var(--line)}
   .chevron{display:none}
-  .subnav{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;min-width:0;padding:6px 0 10px 16px;border-bottom:1px solid var(--line)}
+  .subnav{position:static;opacity:1;visibility:inherit;transform:none;box-shadow:none;border:0;min-width:0;padding:6px 0 10px 16px;border-bottom:1px solid var(--line)}
   .subnav a{padding:9px 0;font-size:1rem;color:var(--text);font-weight:550}
   .subnav a:hover,.subnav a[aria-current=page]{background:none}
   .nav-cta{margin:28px 0 0;min-height:56px;font-size:1rem}
