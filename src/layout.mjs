@@ -12,7 +12,7 @@ export const esc = value => String(value).replaceAll('&', '&amp;').replaceAll('<
 export const updated = '2026-10-09';
 
 // All photos are stored locally (no requests to Unsplash at runtime).
-// To add or swap a photo: place name-640/960/1440.webp in assets/, add an entry here.
+// To add or swap a photo: place name-640/768/960/1440.webp in assets/, add an entry here.
 // The credits page is generated from this list.
 export const photos = {
   hero: { w: 960, h: 1440, alt: 'Ein Vater küsst sein neugeborenes Baby zärtlich auf den Kopf.', author: 'Ana Curcan', source: 'https://unsplash.com/photos/a-loving-father-kisses-his-newborn-babys-head-wYYjCdLENyQ', subject: 'Vater küsst sein Neugeborenes' },
@@ -25,7 +25,7 @@ export const photos = {
 
 export function photo(name, { sizes = '(max-width: 760px) 100vw, 50vw', priority = false, cls = '', alt = photos[name].alt } = {}) {
   const p = photos[name];
-  return `<img${cls ? ` class="${cls}"` : ''} src="assets/${name}-960.webp" srcset="assets/${name}-640.webp 640w, assets/${name}-960.webp 960w, assets/${name}-1440.webp 1440w" sizes="${sizes}" width="${p.w}" height="${p.h}" alt="${esc(alt)}" ${priority ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"'} decoding="async">`;
+  return `<img${cls ? ` class="${cls}"` : ''} src="assets/${name}-960.webp" srcset="assets/${name}-640.webp 640w, assets/${name}-768.webp 768w, assets/${name}-960.webp 960w, assets/${name}-1440.webp 1440w" sizes="${sizes}" width="${p.w}" height="${p.h}" alt="${esc(alt)}" ${priority ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"'} decoding="async">`;
 }
 
 export const arrow = `<svg class="icon-arrow" aria-hidden="true" viewBox="0 0 20 20" width="20" height="20"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -146,6 +146,7 @@ ${file === '404.html' ? `  <base href="${site.url}">\n` : ''}  <link rel="canoni
   <link rel="alternate" hreflang="de-DE" href="${url}">
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <script>document.documentElement.classList.add('js')</script>
   <link rel="preload" href="assets/manrope.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/site.css?v=${assetVersion.css}">
   <meta property="og:type" content="${page.article ? 'article' : 'website'}">

@@ -1,5 +1,5 @@
 @font-face{font-family:Manrope;src:url('manrope.woff2') format('woff2');font-style:normal;font-weight:200 800;font-display:swap}
-@font-face{font-family:Newsreader;src:url('newsreader-italic.woff2') format('woff2');font-style:italic;font-weight:200 800;font-display:swap}
+@font-face{font-family:Newsreader;src:url('newsreader-italic.woff2?v=2') format('woff2');font-style:italic;font-weight:450;font-display:swap}
 
 /* ---------- Tokens ----------
    Built like a practice or studio website: white pages, warm brown from the logo,
