@@ -47,6 +47,13 @@ ErrorDocument 404 /404.html
   ExpiresByType text/html "access plus 0 seconds"
 </IfModule>
 
+# Manche Server setzen fuer JS nur 7 Tage. Versionierte Dateien deshalb ausdruecklich ein Jahr cachen.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|woff2)$">
+    Header set Cache-Control "public, max-age=31536000"
+  </FilesMatch>
+</IfModule>
+
 # Punktdateien (.htaccess, .nojekyll, .git*) nicht ausliefern.
 <IfModule mod_authz_core.c>
   <FilesMatch "^\.">
