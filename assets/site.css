@@ -1,10 +1,7 @@
 @font-face{font-family:Manrope;src:url('manrope.woff2') format('woff2');font-style:normal;font-weight:200 800;font-display:swap}
 @font-face{font-family:Newsreader;src:url('newsreader-italic.woff2?v=2') format('woff2');font-style:italic;font-weight:450;font-display:swap}
 
-/* ---------- Tokens ----------
-   Built like a practice or studio website: white pages, warm brown from the logo,
-   one sans-serif for everything, photos as large surfaces, solid buttons.
-   No eyebrow labels, no decorative underlines, square edges. */
+/* Tokens */
 :root{
   --white:#fff;--soft:#f6f0e8;--sand:#ece1d3;
   --ink:#241b17;--text:#4b413b;--muted:#776b62;--line:#e7ddd1;--line-2:#d3c4b3;
@@ -50,7 +47,7 @@ button{cursor:pointer}button:disabled{cursor:default;opacity:.38}
 .icon{flex:none}
 .icon-arrow{flex:none;transition:transform .3s var(--ease)}
 
-/* ---------- Buttons ---------- */
+/* Buttons */
 .button{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:14px 28px;border:2px solid var(--brand);background:var(--brand);color:#fff;font-size:.95rem;font-weight:700;line-height:1.2;text-decoration:none;transition:background .25s,border-color .25s,color .25s}
 .button:hover{background:var(--brand-dark);border-color:var(--brand-dark);text-decoration:none}
 .button:hover .icon-arrow,.teaser:hover .icon-arrow,.article-teaser:hover .icon-arrow{transform:translateX(4px)}
@@ -65,7 +62,7 @@ button{cursor:pointer}button:disabled{cursor:default;opacity:.38}
 .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
 .actions.center{justify-content:center;margin-top:56px}
 
-/* ---------- Top bar & header ---------- */
+/* Top bar & header */
 .topbar{background:var(--brand-dark);color:rgba(255,255,255,.8);font-size:.82rem;font-weight:550}
 .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:42px}
 .topbar ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
@@ -101,7 +98,7 @@ button{cursor:pointer}button:disabled{cursor:default;opacity:.38}
 .breadcrumb a{color:var(--muted);font-weight:550}
 .breadcrumb [aria-current]{color:var(--ink);font-weight:650}
 
-/* ---------- Home hero ---------- */
+/* Home hero */
 .hero{position:relative;min-height:clamp(560px,84vh,820px);display:flex;color:#fff;overflow:hidden;background:var(--brand-dark)}
 .hero-media{position:absolute;inset:0}
 .hero-media picture{display:contents}
@@ -112,18 +109,18 @@ button{cursor:pointer}button:disabled{cursor:default;opacity:.38}
 .hero-text{font-size:clamp(1.05rem,1.4vw,1.25rem);max-width:540px;margin-top:24px;color:rgba(255,255,255,.88)}
 .hero .actions{margin-top:36px}
 
-/* ---------- Welcome ---------- */
+/* Welcome */
 .welcome{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.9fr);gap:clamp(40px,7vw,110px);align-items:center}
 .welcome h1{font-size:clamp(1.9rem,3.2vw,2.75rem);margin-bottom:28px;max-width:22ch}
 .welcome .lead{margin-bottom:20px;color:var(--ink)}
 
-/* ---------- Section intro ---------- */
+/* Section intro */
 .intro{max-width:760px;margin-bottom:clamp(36px,4vw,56px)}
 .intro>p{margin-top:16px;font-size:1.08rem}
 .intro.row{max-width:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px 80px;align-items:end}
 .intro.row>p{margin:0;max-width:560px}
 
-/* ---------- Photo teasers ---------- */
+/* Photo teasers */
 .teasers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
 .teasers:has(> :nth-child(3):last-child){grid-template-columns:repeat(3,minmax(0,1fr))}
 .teaser{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;color:#fff;background:var(--brand-dark)}
@@ -137,7 +134,7 @@ button{cursor:pointer}button:disabled{cursor:default;opacity:.38}
 .teaser-more{display:inline-flex;align-items:center;gap:8px;font-size:.9rem;font-weight:700;margin-top:10px}
 .teaser .teaser-more{color:var(--accent-soft)}
 
-/* ---------- Split photo / text ---------- */
+/* Split photo / text */
 .split{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
 .split-media{position:relative;min-height:clamp(420px,46vw,680px);overflow:hidden}
 .split-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos)}
@@ -152,7 +149,7 @@ button{cursor:pointer}button:disabled{cursor:default;opacity:.38}
 .split.dark a:not(.button){color:var(--accent-soft)}
 .split.soft{background:var(--soft)}
 
-/* ---------- Lists ---------- */
+/* Lists */
 .checks{list-style:none;padding:0;margin:20px 0;display:grid;gap:10px}
 .checks li{display:flex;gap:12px;line-height:1.55}
 .checks svg{flex:none;margin-top:3px;color:var(--accent)}
@@ -162,13 +159,13 @@ button{cursor:pointer}button:disabled{cursor:default;opacity:.38}
 .promise h3{margin-bottom:6px}
 .promise .checks{font-size:.97rem}
 
-/* ---------- Steps ---------- */
+/* Steps */
 .steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(24px,3vw,48px)}
 .step-no{display:block;font-size:3.4rem;font-weight:800;line-height:1;letter-spacing:-.04em;color:var(--accent-soft);margin-bottom:18px}
 .steps h3{margin-bottom:10px}
 .steps p{font-size:.97rem}
 
-/* ---------- Prices ---------- */
+/* Prices */
 .prices-home{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(40px,6vw,96px);align-items:start}
 .prices-home h2{margin-bottom:20px}
 .price-table{width:100%;border-collapse:collapse;font-size:.97rem}
@@ -197,7 +194,7 @@ button{cursor:pointer}button:disabled{cursor:default;opacity:.38}
 .single-price{text-align:center}
 .single-price .price-value{margin:0 0 18px}
 
-/* ---------- Content pages ---------- */
+/* Content pages */
 .page-head{background:var(--soft);padding-block:clamp(56px,7vw,96px)}
 .page-head h1{max-width:22ch}
 .page-head .lead{max-width:700px;margin-top:20px}
@@ -235,7 +232,7 @@ button{cursor:pointer}button:disabled{cursor:default;opacity:.38}
 .knowledge-list h3{font-size:1.3rem;margin-bottom:14px}
 .knowledge-list p{font-size:.98rem}
 
-/* ---------- About ---------- */
+/* About */
 .about-home-inner{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(40px,7vw,110px);align-items:center}
 .about-home-inner h2{margin-bottom:22px}
 .monogram{border-left:4px solid var(--accent);padding:8px 0 8px clamp(24px,3vw,40px)}
@@ -253,7 +250,7 @@ button{cursor:pointer}button:disabled{cursor:default;opacity:.38}
 .certificate>a:hover{transform:translateY(-4px)}
 .certificate figcaption{font-size:.85rem;color:var(--muted);margin-top:16px;line-height:1.55}
 
-/* ---------- Partner: Kinderkörbchen ---------- */
+/* Partner: Kinderkörbchen */
 .partner{background:var(--soft);padding-block:var(--space)}
 .partner-inner{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(40px,7vw,110px);align-items:center}
 .partner-name{font-family:var(--serif);font-style:italic;font-size:clamp(2.6rem,5vw,4.2rem);line-height:1;color:var(--brand);letter-spacing:-.02em;margin-bottom:22px}
@@ -265,7 +262,7 @@ button{cursor:pointer}button:disabled{cursor:default;opacity:.38}
 .partner-facts dt{font-size:.85rem;font-weight:700;color:var(--muted)}
 .partner-facts dd{margin:0;color:var(--ink);font-weight:650}
 
-/* ---------- Ratgeber teasers & articles ---------- */
+/* Ratgeber teasers & articles */
 .articles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,40px)}
 .articles:has(> :nth-child(2):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}
 .article-teaser{display:flex;flex-direction:column;color:var(--text);font-weight:450}
@@ -299,7 +296,7 @@ button{cursor:pointer}button:disabled{cursor:default;opacity:.38}
 .callout{margin-top:48px;padding:24px 28px;background:var(--soft);border-left:4px solid var(--accent)}
 .callout p{font-size:.95rem!important}
 
-/* ---------- FAQ ---------- */
+/* FAQ */
 .faq-layout{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:clamp(40px,7vw,110px);align-items:start}
 .faq-layout>div:first-child{position:sticky;top:120px}
 .faq-layout>div:first-child>p{margin-top:16px}
@@ -319,7 +316,7 @@ details[open] .plus::after{transform:rotate(0)}
 details[open] .answer{animation:reveal-answer .45s var(--ease)}
 @keyframes reveal-answer{from{opacity:0;transform:translateY(-6px)}}
 
-/* ---------- Contact band ---------- */
+/* Contact band */
 .contact-band{background:var(--brand-dark);color:rgba(255,255,255,.8);padding-block:var(--space)}
 .contact-band-inner{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(40px,7vw,110px);align-items:center}
 .contact-band h2{color:#fff;margin-bottom:20px;max-width:18ch}
@@ -330,7 +327,7 @@ details[open] .answer{animation:reveal-answer .45s var(--ease)}
 .contact-facts strong{display:block;color:rgba(255,255,255,.6);font-size:.82rem;font-weight:650}
 .contact-facts a{color:#fff;overflow-wrap:anywhere}
 
-/* ---------- Contact & booking ---------- */
+/* Contact & booking */
 .contact-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:clamp(40px,6vw,96px);align-items:start}
 .contact-aside{position:sticky;top:110px}
 .contact-aside h2{font-size:clamp(1.8rem,2.6vw,2.4rem)}
@@ -397,12 +394,12 @@ input::placeholder,textarea::placeholder{color:#7a7065}
 .fallback-contact{margin-top:16px}
 .note{padding:32px;background:var(--soft)}
 
-/* ---------- Legal ---------- */
+/* Legal */
 .legal-section{padding-block:clamp(32px,4vw,56px) var(--space)}
 .legal-section h2{font-size:clamp(1.4rem,2vw,1.75rem);margin:1.8em 0 .6em}
 address{font-style:normal;overflow-wrap:anywhere}
 
-/* ---------- Footer ---------- */
+/* Footer */
 .footer{background:var(--soft);font-size:.93rem}
 .footer-main{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.3fr;gap:48px;padding-block:clamp(56px,7vw,88px)}
 .footer-brand p{color:var(--muted);margin-top:20px;max-width:320px}
@@ -420,7 +417,7 @@ address{font-style:normal;overflow-wrap:anywhere}
 .credit a{color:var(--muted);font-weight:700;letter-spacing:.04em;transition:color .2s}
 .credit a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:.2em}
 
-/* ---------- Motion ---------- */
+/* Motion */
 .js [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:calc(var(--i,0) * 80ms)}
 .js [data-reveal].is-visible{opacity:1;transform:none}
 .hero-inner>*{animation:rise .9s var(--ease) both}
@@ -437,7 +434,7 @@ address{font-style:normal;overflow-wrap:anywhere}
   .js [data-reveal]{opacity:1;transform:none}
 }
 
-/* ---------- Responsive ---------- */
+/* Responsive */
 @media (max-width:1240px){
   .topbar-inner>p{display:none}
   .topbar ul{margin-left:auto}

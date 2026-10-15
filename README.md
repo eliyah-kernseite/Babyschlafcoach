@@ -101,15 +101,6 @@ Repository-Root, ein Build auf dem Server ist nicht nötig. Die .htaccess sperrt
 Quellcode, Tests und Arbeitsdateien. GitHub Pages danach abschalten, damit es
 keine zweite Kopie der Seite gibt.
 
-## Bestehende PHP-Dateien
-
-api/, private/, vendor/ und .htaccess stammen aus der alten Hostinger-Fassung.
-Sie wurden nicht gelöscht, werden von der neuen Oberfläche aber nicht verwendet.
-GitHub Pages führt PHP nicht aus und beachtet keine .htaccess-Schutzregeln.
-**Keine echten Zugangsdaten ins öffentliche Repository eintragen.**
-Bei einem späteren Hostinger-Umzug die vorhandene Backend-Konfiguration gesondert
-prüfen; der aktuelle Website-Code benutzt auch dort die E-Mail-Entwurfsfunktion.
-
 ## Offene Freigaben
 
 Porträt und Montessori-/Kinderyoga-Nachweise ergänzen. Inhaltliche und
