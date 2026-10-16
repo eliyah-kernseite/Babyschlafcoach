@@ -1,0 +1,76 @@
+name: Branch live aktualisieren
+
+# Jeder Push auf main baut und prüft die Website und legt danach nur die
+# Dateien, die online gehen sollen, auf den Branch `live`. Hostinger zieht
+# diesen Branch per Git-Bereitstellung nach public_html.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: babyschlaf-live
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Main auschecken
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Bauen und prüfen
+        run: |
+          npm ci --ignore-scripts
+          npm run build
+          # Die erzeugten HTML-Dateien müssen zum Stand in main passen.
+          git diff --exit-code -- '*.html' sitemap.xml robots.txt
+          npm test
+
+      - name: Veröffentlichungspaket zusammenstellen
+        shell: bash
+        run: |
+          set -euo pipefail
+          paket="$RUNNER_TEMP/live"
+          mkdir -p "$paket"
+          git archive HEAD | tar x -C "$paket"
+          cd "$paket"
+          # Quellcode, Tests und Arbeitsdateien gehören nicht auf die Website.
+          rm -rf .github src tests scripts docs .gitignore .nojekyll README.md package.json package-lock.json ./*.zip
+          test -f index.html
+          test -f .htaccess
+
+      - name: Branch live aktualisieren
+        shell: bash
+        run: |
+          set -euo pipefail
+          paket="$RUNNER_TEMP/live"
+          ziel="$RUNNER_TEMP/live-branch"
+          if git fetch origin live; then
+            git worktree add -B live "$ziel" origin/live
+          else
+            git worktree add --detach "$ziel"
+            git -C "$ziel" checkout --orphan live
+          fi
+          find "$ziel" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf -- {} +
+          cp -a "$paket"/. "$ziel"/
+          cd "$ziel"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "live ist bereits aktuell."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Live-Stand aus main ${GITHUB_SHA::7}"
+          git push origin HEAD:live
