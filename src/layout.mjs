@@ -62,7 +62,7 @@ export const navItems = [
   ['fragen.html', 'Häufige Fragen'],
 ];
 // Agency credit, shown once at the very bottom of every page via the global footer.
-export const credit = `<p class="credit">Mit <span aria-label="Liebe">♥</span> erstellt von <a href="https://kernseite.com" title="Webdesign Agentur Würzburg" target="_blank" rel="noopener">KERNSEITE</a> aus Würzburg</p>`;
+export const credit = `<p class="credit">Mit <span aria-label="Liebe">♥</span> erstellt von <a href="https://www.kernseite.com/" title="Webdesign Agentur Würzburg" target="_blank" rel="noopener">KERNSEITE</a> aus Würzburg</p>`;
 const legalItems = [['impressum.html', 'Impressum'], ['datenschutz.html', 'Datenschutz'], ['agb.html', 'AGB'], ['widerruf.html', 'Widerruf'], ['barrierefreiheit.html', 'Barrierefreiheit'], ['bildnachweise.html', 'Bildnachweise']];
 const brand = `<a class="brand" href="index.html" aria-label="Babyschlafberatung Anna-Lena Korb – Startseite"><img src="assets/logo.png" alt="Logo Babyschlafberatung Anna-Lena Korb" width="56" height="56"><span><span class="brand-name">Anna-Lena Korb</span><span class="brand-description">Babyschlafberatung</span></span></a>`;
 
