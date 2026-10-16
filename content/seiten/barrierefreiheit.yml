@@ -1,0 +1,21 @@
+seo:
+  titel: Hinweise zur Zugänglichkeit
+  menuename: Barrierefreiheit
+text_1: |-
+  ## Eine Website, die zugänglich sein soll
+
+  Die Website bietet eine logische Überschriftenstruktur, beschriftete Formularfelder, alternative Bildbeschreibungen und sichtbare Tastaturfokussierungen.
+
+  ## Bedienung
+
+  Über „Zum Inhalt springen“ gelangst du per Tastatur direkt zum Hauptinhalt. Links, Menü, Terminauswahl und aufklappbare Fragen lassen sich mit der Tastatur bedienen. Alle Tage und Uhrzeiten sind einzeln beschriftete Schaltflächen. Alternativ kann das Datum direkt eingegeben werden. Die Darstellung passt sich an kleinere Bildschirme an und berücksichtigt reduzierte Bewegung.
+
+  Ohne JavaScript sind die Informationen und Kontaktlinks weiterhin verfügbar. Die interaktive Terminauswahl benötigt JavaScript; eine Anfrage ist alternativ per E-Mail oder Telefon möglich.
+
+  ## Stand der Bewertung
+
+  Diese freiwillige Beschreibung ist kein Zertifikat und keine Erklärung einer vollständig geprüften WCAG- oder BFSG-Konformität. Die tatsächliche Nutzung mit unterschiedlichen Hilfsmitteln kann zu abweichenden Ergebnissen führen. Das eingescannte Zertifikat ist nicht als barrierefreies PDF aufbereitet; die wesentlichen Angaben stehen als HTML-Text auf der Über-mich-Seite.
+
+  ## Eine Barriere melden
+
+  Wenn du eine Information nicht erreichen oder die Terminauswahl nicht nutzen kannst, schreibe an [{{email}}](mailto:{{email}}) oder rufe unter [{{telefon}}](tel:{{telefon_nummer}}) an. Nenne möglichst die betroffene Seite und das Problem. Ich helfe dir gerne persönlich weiter.

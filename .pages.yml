@@ -1,0 +1,1731 @@
+# Pages CMS (https://app.pagescms.org): which content files can be edited and how.
+# Each save is a commit on main. The workflow "Branch live aktualisieren" then rebuilds the pages and publishes them.
+media:
+  - name: bilder
+    label: Fotos
+    input: assets/bilder
+    output: /assets/bilder
+    extensions:
+      - jpg
+      - jpeg
+      - png
+      - webp
+    rename: safe
+content:
+  - name: einstellungen
+    label: "Einstellungen: Kontakt, Preise, Kopf- und Fußzeile"
+    type: file
+    path: content/einstellungen.yml
+    fields:
+      - name: kontakt
+        label: Kontaktdaten
+        type: object
+        fields:
+          - name: email
+            label: E-Mail-Adresse
+            type: string
+            description: Auch Empfänger der Terminanfragen. Bei einer neuen Adresse muss sie zuerst bei Web3Forms bestätigt werden.
+          - name: telefon_anzeige
+            label: Telefon (so wie es angezeigt wird)
+            type: string
+          - name: telefon_nummer
+            label: Telefon zum Anrufen
+            type: string
+            description: Internationale Schreibweise ohne Leerzeichen, z. B. +491731234567
+          - name: kinderkoerbchen_url
+            label: Webseite Kinderkörbchen
+            type: string
+      - name: angebote
+        label: Angebote und Preise
+        type: object
+        fields:
+          - name: id
+            label: Kennung
+            type: string
+            readonly: true
+          - name: name
+            label: Name
+            type: string
+          - name: preis
+            label: Preis in Euro
+            type: number
+            options:
+              min: 0
+          - name: minuten
+            label: Dauer des Termins in Minuten
+            type: number
+            options:
+              min: 10
+          - name: leistung
+            label: Leistung (Preistabelle auf der Startseite)
+            type: string
+        description: Preise gelten automatisch für Preistabelle, Paketkarten und Terminformular. Preise, die in Fließtexten stehen (z. B. in den Fragen), bitte dort zusätzlich ändern.
+        list:
+          min: 5
+          max: 5
+          collapsible:
+            collapsed: true
+            summary: "{name}: {preis} €"
+      - name: kopfzeile
+        label: Zeile ganz oben
+        type: object
+        fields:
+          - name: text
+            label: Text
+            type: string
+          - name: zeiten
+            label: Gesprächszeiten
+            type: string
+      - name: fusszeile
+        label: Fußzeile
+        type: object
+        fields:
+          - name: text
+            label: Text unter dem Logo
+            type: text
+          - name: adresse
+            label: Adresse
+            type: text
+            description: Neue Zeile = Zeilenumbruch.
+          - name: zeiten
+            label: Gesprächszeiten
+            type: string
+          - name: copyright
+            label: Copyright-Zeile
+            type: string
+      - name: kontaktbereich
+        label: Kontaktbereich am Ende jeder Seite
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift (Standard)
+            type: string
+          - name: text
+            label: Text
+            type: text
+          - name: button
+            label: Button
+            type: string
+          - name: zeiten
+            label: Gesprächszeiten
+            type: string
+          - name: standort
+            label: Standort
+            type: string
+      - name: kinderkoerbchen
+        label: Kasten Kinderkörbchen (Über mich)
+        type: object
+        fields:
+          - name: vorzeile
+            label: Kleine Zeile oben
+            type: string
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: text
+            label: Text
+            type: text
+          - name: button
+            label: Button
+            type: string
+          - name: fakten
+            label: Fakten
+            type: object
+            fields:
+              - name: begriff
+                label: Begriff
+                type: string
+              - name: text
+                label: Text
+                type: string
+            list: true
+      - name: portraet
+        label: Zitat neben dem Logo (Über mich)
+        type: object
+        fields:
+          - name: zitat
+            label: Zitat
+            type: text
+          - name: unterzeile
+            label: Zeile unter dem Namen
+            type: string
+  - name: fotos
+    label: "Fotos: Beschreibungen und Bildnachweise"
+    type: file
+    path: content/fotos.yml
+    fields:
+      - name: fotos
+        label: Fotos
+        type: object
+        fields:
+          - name: bild
+            label: Foto
+            type: image
+            options:
+              media: bilder
+          - name: beschreibung
+            label: Bildbeschreibung für Screenreader und Google (Alt-Text)
+            type: text
+          - name: motiv
+            label: Motiv (für die Bildnachweise)
+            type: string
+          - name: fotograf
+            label: Fotograf oder Fotografin
+            type: string
+            description: Leer lassen bei eigenen Fotos, dann erscheint das Foto nicht in den Bildnachweisen.
+          - name: quelle
+            label: Quelle (Link)
+            type: string
+        description: Jedes Foto, das auf der Seite verwendet wird, braucht hier einen Eintrag mit Bildbeschreibung.
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{motiv}"
+  - name: bausteine
+    label: Bausteine auf mehreren Seiten
+    type: file
+    path: content/bausteine.yml
+    fields:
+      - name: schwerpunkte
+        label: Kacheln Schwerpunkte (Startseite, Schlafberatung, Würzburg)
+        type: object
+        fields:
+          - name: seite
+            label: Seite
+            type: string
+            readonly: true
+          - name: titel
+            label: Titel
+            type: string
+          - name: text
+            label: Text
+            type: string
+          - name: bild
+            label: Foto
+            type: image
+            options:
+              media: bilder
+          - name: ausschnitt
+            label: Bildausschnitt
+            type: string
+            description: "Welcher Teil des Fotos sichtbar bleibt: erst waagerecht, dann senkrecht, z. B. 50% 30% (Mitte, eher oben)."
+        list:
+          min: 4
+          max: 4
+          collapsible:
+            collapsed: true
+            summary: "{titel}"
+      - name: ratgeber_titel
+        label: Überschrift über den Ratgeber-Kacheln unter Artikeln
+        type: string
+      - name: ratgeber
+        label: Kacheln Ratgeber-Artikel
+        type: object
+        fields:
+          - name: seite
+            label: Seite
+            type: string
+            readonly: true
+          - name: titel
+            label: Titel
+            type: string
+          - name: bild
+            label: Foto
+            type: image
+            options:
+              media: bilder
+        list:
+          min: 3
+          max: 3
+          collapsible:
+            collapsed: true
+            summary: "{titel}"
+      - name: zertifikat
+        label: Bildunterschrift Zertifikat
+        type: object
+        fields:
+          - name: text_lang
+            label: Text (Über mich)
+            type: text
+          - name: text_kurz
+            label: Text (Startseite)
+            type: text
+          - name: link
+            label: Linktext
+            type: string
+  - name: seite-404
+    label: "Seite: Fehlerseite (404)"
+    type: file
+    path: content/seiten/404.yml
+    fields:
+      - name: seo
+        label: Suchmaschinen und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Titel im Browser-Tab und bei Google
+            type: string
+          - name: beschreibung
+            label: Beschreibung bei Google (etwa 150 Zeichen)
+            type: text
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: kopf
+        label: Seitenkopf
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift (H1)
+            type: string
+          - name: text
+            label: Einleitung
+            type: text
+      - name: button_1
+        label: "Button: Termin anfragen"
+        type: string
+  - name: seite-index
+    label: "Seite: Startseite"
+    type: file
+    path: content/seiten/index.yml
+    fields:
+      - name: seo
+        label: Suchmaschinen und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Titel im Browser-Tab und bei Google
+            type: string
+          - name: beschreibung
+            label: Beschreibung bei Google (etwa 150 Zeichen)
+            type: text
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: startbild
+        label: Großes Startbild mit Text
+        type: object
+        fields:
+          - name: titel
+            label: Große Überschrift
+            type: text
+            description: Neue Zeile = Zeilenumbruch.
+          - name: text
+            label: Text darunter
+            type: text
+          - name: bild
+            label: Foto auf großen Bildschirmen (quer)
+            type: image
+            options:
+              media: bilder
+          - name: bild_handy
+            label: Foto auf dem Handy (hochkant)
+            type: image
+            options:
+              media: bilder
+      - name: button_1
+        label: "Button: Kostenloses Kennenlernen"
+        type: string
+      - name: button_10
+        label: "Button: Zur Schlafberatung"
+        type: string
+      - name: hauptueberschrift
+        label: Hauptüberschrift (H1)
+        type: string
+      - name: text_1
+        label: "Text: .lead Wenn das Einschlafen jeden Abend ewig dauert und …"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_2
+        label: "Button: Mehr über mich"
+        type: string
+      - name: abschnitt_1
+        label: "Abschnitt: Meine Schlafberatung im Überblick"
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: text
+            label: Text darunter (optional)
+            type: text
+      - name: foto_1
+        label: Foto im Abschnitt
+        type: object
+        fields:
+          - name: bild
+            label: Foto
+            type: image
+            options:
+              media: bilder
+          - name: ausschnitt
+            label: Bildausschnitt
+            type: string
+            description: "Welcher Teil des Fotos sichtbar bleibt: erst waagerecht, dann senkrecht, z. B. 50% 30% (Mitte, eher oben)."
+      - name: text_2
+        label: "Text: Wenn der Schlaf den ganzen Familienalltag bestimmt"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_3
+        label: "Button: Meine Arbeitsweise"
+        type: string
+      - name: abschnitt_2
+        label: "Abschnitt: Wie die Beratung abläuft"
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: text
+            label: Text darunter (optional)
+            type: text
+      - name: schritte
+        label: Ablauf in Schritten
+        type: object
+        fields:
+          - name: titel
+            label: Schritt
+            type: string
+          - name: text
+            label: Beschreibung
+            type: text
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{index}. {titel}"
+      - name: button_4
+        label: "Button: Ablauf im Detail"
+        type: string
+      - name: foto_2
+        label: Foto im Abschnitt
+        type: object
+        fields:
+          - name: bild
+            label: Foto
+            type: image
+            options:
+              media: bilder
+          - name: ausschnitt
+            label: Bildausschnitt
+            type: string
+            description: "Welcher Teil des Fotos sichtbar bleibt: erst waagerecht, dann senkrecht, z. B. 50% 30% (Mitte, eher oben)."
+      - name: text_3
+        label: "Text: Beratung von eurem Sofa aus, egal wo ihr wohnt"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_5
+        label: "Button: Kennenlernen anfragen"
+        type: string
+      - name: button_11
+        label: "Button: Online-Beratung"
+        type: string
+      - name: text_4
+        label: "Text: Was die Beratung kostet"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_6
+        label: "Button: Alle Leistungen und Pakete"
+        type: string
+      - name: zitat
+        label: Zitat neben dem Logo
+        type: object
+        fields:
+          - name: zitat
+            label: Zitat
+            type: text
+          - name: unterzeile
+            label: Zeile unter dem Namen
+            type: string
+      - name: text_5
+        label: "Text: Wer euch berät"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_7
+        label: "Button: Meine Geschichte"
+        type: string
+      - name: button_8
+        label: "Button: Qualifikationen"
+        type: string
+      - name: abschnitt_3
+        label: "Abschnitt: Ratgeber für müde Eltern"
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: text
+            label: Text darunter (optional)
+            type: text
+      - name: text_6
+        label: "Text: Häufige Fragen zur Schlafberatung"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_9
+        label: "Button: Alle Fragen und Antworten"
+        type: string
+      - name: fragen
+        label: Häufige Fragen
+        type: object
+        fields:
+          - name: frage
+            label: Frage
+            type: string
+          - name: antwort
+            label: Antwort
+            type: text
+            description: "**fett** und [Linktext](seite.html) sind möglich."
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{frage}"
+  - name: seite-schlafberatung
+    label: "Seite: Schlafberatung (Überblick)"
+    type: file
+    path: content/seiten/schlafberatung.yml
+    fields:
+      - name: seo
+        label: Suchmaschinen und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Titel im Browser-Tab und bei Google
+            type: string
+          - name: beschreibung
+            label: Beschreibung bei Google (etwa 150 Zeichen)
+            type: text
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: kopf
+        label: Seitenkopf
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift (H1)
+            type: string
+          - name: text
+            label: Einleitung
+            type: text
+          - name: bild
+            label: Foto
+            type: image
+            options:
+              media: bilder
+          - name: ausschnitt
+            label: Bildausschnitt
+            type: string
+            description: "Welcher Teil des Fotos sichtbar bleibt: erst waagerecht, dann senkrecht, z. B. 50% 30% (Mitte, eher oben)."
+      - name: text_1
+        label: "Text: Was soll für euch leichter werden?"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_2
+        label: "Text: Auf einen Blick"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: liste_1
+        label: "Liste: Alter, Ort, Erstgespräch"
+        type: object
+        fields:
+          - name: begriff
+            label: Begriff
+            type: string
+          - name: text
+            label: Text
+            type: text
+            description: Neue Zeile = Zeilenumbruch.
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{begriff}"
+      - name: button_1
+        label: "Button: Termin anfragen"
+        type: string
+      - name: abschnitt_1
+        label: "Abschnitt: Für welches Alter und welche Situation?"
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: text
+            label: Text darunter (optional)
+            type: text
+      - name: text_3
+        label: "Text: Jedes Alter braucht etwas anderes"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: liste_2
+        label: "Liste: 0–3 Monate · Neugeborene, 4–12 Monate · Babys, 1–3 Jahre · Kleinkinder"
+        type: object
+        fields:
+          - name: begriff
+            label: Begriff
+            type: string
+          - name: text
+            label: Text
+            type: text
+            description: Neue Zeile = Zeilenumbruch.
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{begriff}"
+      - name: foto_1
+        label: Foto im Abschnitt
+        type: object
+        fields:
+          - name: bild
+            label: Foto
+            type: image
+            options:
+              media: bilder
+          - name: ausschnitt
+            label: Bildausschnitt
+            type: string
+            description: "Welcher Teil des Fotos sichtbar bleibt: erst waagerecht, dann senkrecht, z. B. 50% 30% (Mitte, eher oben)."
+      - name: text_4
+        label: "Text: Eure Geschichte gehört dazu"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_2
+        label: "Button: So läuft die Beratung ab"
+        type: string
+      - name: abschnitt_2
+        label: "Abschnitt: Worauf ihr euch einlasst"
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: text
+            label: Text darunter (optional)
+            type: text
+      - name: text_5
+        label: "Text: Darauf könnt ihr euch verlassen"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_6
+        label: "Text: Was es bei mir nicht gibt"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+  - name: seite-schlafberatung-baby
+    label: "Seite: Schlafberatung für Babys"
+    type: file
+    path: content/seiten/schlafberatung-baby.yml
+    fields:
+      - name: seo
+        label: Suchmaschinen und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Titel im Browser-Tab und bei Google
+            type: string
+          - name: beschreibung
+            label: Beschreibung bei Google (etwa 150 Zeichen)
+            type: text
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: kopf
+        label: Seitenkopf
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift (H1)
+            type: string
+          - name: text
+            label: Einleitung
+            type: text
+          - name: bild
+            label: Foto
+            type: image
+            options:
+              media: bilder
+          - name: ausschnitt
+            label: Bildausschnitt
+            type: string
+            description: "Welcher Teil des Fotos sichtbar bleibt: erst waagerecht, dann senkrecht, z. B. 50% 30% (Mitte, eher oben)."
+      - name: text_1
+        label: "Text: Neugeborene brauchen kein Schlaftraining"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_2
+        label: "Text: Passend für euch"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_1
+        label: "Button: Kennenlernen anfragen"
+        type: string
+      - name: text_3
+        label: "Text: .small 20 Minuten, kostenlos und unverbindlich"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: abschnitt_1
+        label: "Abschnitt: Zum Weiterlesen"
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: text
+            label: Text darunter (optional)
+            type: text
+      - name: text_4
+        label: "Text: Häufige Fragen zum Babyschlaf"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_2
+        label: "Button: Alle Fragen"
+        type: string
+      - name: fragen
+        label: Häufige Fragen
+        type: object
+        fields:
+          - name: frage
+            label: Frage
+            type: string
+          - name: antwort
+            label: Antwort
+            type: text
+            description: "**fett** und [Linktext](seite.html) sind möglich."
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{frage}"
+  - name: seite-schlafberatung-kleinkind
+    label: "Seite: Schlafberatung für Kleinkinder"
+    type: file
+    path: content/seiten/schlafberatung-kleinkind.yml
+    fields:
+      - name: seo
+        label: Suchmaschinen und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Titel im Browser-Tab und bei Google
+            type: string
+          - name: beschreibung
+            label: Beschreibung bei Google (etwa 150 Zeichen)
+            type: text
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: kopf
+        label: Seitenkopf
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift (H1)
+            type: string
+          - name: text
+            label: Einleitung
+            type: text
+          - name: bild
+            label: Foto
+            type: image
+            options:
+              media: bilder
+          - name: ausschnitt
+            label: Bildausschnitt
+            type: string
+            description: "Welcher Teil des Fotos sichtbar bleibt: erst waagerecht, dann senkrecht, z. B. 50% 30% (Mitte, eher oben)."
+      - name: text_1
+        label: "Text: Kleinkinder von 1 bis 3 Jahren"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_2
+        label: "Text: Passend für euch"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_1
+        label: "Button: Kennenlernen anfragen"
+        type: string
+      - name: text_3
+        label: "Text: .small 20 Minuten, kostenlos und unverbindlich"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: foto_1
+        label: Foto im Abschnitt
+        type: object
+        fields:
+          - name: bild
+            label: Foto
+            type: image
+            options:
+              media: bilder
+          - name: ausschnitt
+            label: Bildausschnitt
+            type: string
+            description: "Welcher Teil des Fotos sichtbar bleibt: erst waagerecht, dann senkrecht, z. B. 50% 30% (Mitte, eher oben)."
+      - name: text_4
+        label: "Text: Beide Eltern an einem Tisch"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_2
+        label: "Button: So funktioniert die Online-Beratung"
+        type: string
+      - name: text_5
+        label: "Text: Häufige Fragen zum Kleinkindschlaf"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_3
+        label: "Button: Alle Fragen"
+        type: string
+      - name: fragen
+        label: Häufige Fragen
+        type: object
+        fields:
+          - name: frage
+            label: Frage
+            type: string
+          - name: antwort
+            label: Antwort
+            type: text
+            description: "**fett** und [Linktext](seite.html) sind möglich."
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{frage}"
+  - name: seite-online-schlafberatung
+    label: "Seite: Online-Beratung"
+    type: file
+    path: content/seiten/online-schlafberatung.yml
+    fields:
+      - name: seo
+        label: Suchmaschinen und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Titel im Browser-Tab und bei Google
+            type: string
+          - name: beschreibung
+            label: Beschreibung bei Google (etwa 150 Zeichen)
+            type: text
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: kopf
+        label: Seitenkopf
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift (H1)
+            type: string
+          - name: text
+            label: Einleitung
+            type: text
+          - name: bild
+            label: Foto
+            type: image
+            options:
+              media: bilder
+          - name: ausschnitt
+            label: Bildausschnitt
+            type: string
+            description: "Welcher Teil des Fotos sichtbar bleibt: erst waagerecht, dann senkrecht, z. B. 50% 30% (Mitte, eher oben)."
+      - name: text_1
+        label: "Text: Warum Schlafberatung online gut funktioniert"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_2
+        label: "Text: Das braucht ihr"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_1
+        label: "Button: Kennenlernen anfragen"
+        type: string
+      - name: abschnitt_1
+        label: "Abschnitt: So läuft die Online-Beratung"
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: text
+            label: Text darunter (optional)
+            type: text
+      - name: schritte
+        label: Ablauf in Schritten
+        type: object
+        fields:
+          - name: titel
+            label: Schritt
+            type: string
+          - name: text
+            label: Beschreibung
+            type: text
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{index}. {titel}"
+      - name: text_3
+        label: "Text: Fragen zur Online-Beratung"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_2
+        label: "Button: Alle Fragen"
+        type: string
+      - name: fragen
+        label: Häufige Fragen
+        type: object
+        fields:
+          - name: frage
+            label: Frage
+            type: string
+          - name: antwort
+            label: Antwort
+            type: text
+            description: "**fett** und [Linktext](seite.html) sind möglich."
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{frage}"
+  - name: seite-schlafberatung-wuerzburg
+    label: "Seite: Vor Ort in Würzburg"
+    type: file
+    path: content/seiten/schlafberatung-wuerzburg.yml
+    fields:
+      - name: seo
+        label: Suchmaschinen und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Titel im Browser-Tab und bei Google
+            type: string
+          - name: beschreibung
+            label: Beschreibung bei Google (etwa 150 Zeichen)
+            type: text
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: kopf
+        label: Seitenkopf
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift (H1)
+            type: string
+          - name: text
+            label: Einleitung
+            type: text
+          - name: bild
+            label: Foto
+            type: image
+            options:
+              media: bilder
+          - name: ausschnitt
+            label: Bildausschnitt
+            type: string
+            description: "Welcher Teil des Fotos sichtbar bleibt: erst waagerecht, dann senkrecht, z. B. 50% 30% (Mitte, eher oben)."
+      - name: text_1
+        label: "Text: Persönlich vor Ort, wenn ihr das möchtet"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_2
+        label: "Text: Babyschlafberatung in Eisingen"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: adresse
+        label: Adresse
+        type: text
+        description: Neue Zeile = Zeilenumbruch.
+      - name: text_3
+        label: "Text: telefon email .small Termine nur nach Vereinbarung. …"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_1
+        label: "Button: Termin anfragen"
+        type: string
+      - name: text_4
+        label: "Text: Für Familien in Würzburg und Umgebung"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_5
+        label: "Text: Lieber erst online?"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_2
+        label: "Button: Zur Online-Beratung"
+        type: string
+      - name: abschnitt_1
+        label: "Abschnitt: Weitere Schwerpunkte"
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: text
+            label: Text darunter (optional)
+            type: text
+  - name: seite-ablauf
+    label: "Seite: Ablauf"
+    type: file
+    path: content/seiten/ablauf.yml
+    fields:
+      - name: seo
+        label: Suchmaschinen und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Titel im Browser-Tab und bei Google
+            type: string
+          - name: beschreibung
+            label: Beschreibung bei Google (etwa 150 Zeichen)
+            type: text
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: kopf
+        label: Seitenkopf
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift (H1)
+            type: string
+          - name: text
+            label: Einleitung
+            type: text
+      - name: abschnitt_1
+        label: "Abschnitt: Vom ersten Gespräch bis zur Begleitung"
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: text
+            label: Text darunter (optional)
+            type: text
+      - name: schritte
+        label: Ablauf in Schritten
+        type: object
+        fields:
+          - name: titel
+            label: Schritt
+            type: string
+          - name: text
+            label: Beschreibung
+            type: text
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{index}. {titel}"
+      - name: foto_1
+        label: Foto im Abschnitt
+        type: object
+        fields:
+          - name: bild
+            label: Foto
+            type: image
+            options:
+              media: bilder
+          - name: ausschnitt
+            label: Bildausschnitt
+            type: string
+            description: "Welcher Teil des Fotos sichtbar bleibt: erst waagerecht, dann senkrecht, z. B. 50% 30% (Mitte, eher oben)."
+      - name: text_1
+        label: "Text: Was ihr vor dem Gespräch bekommt"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_2
+        label: "Text: Euer schriftlicher Plan"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_3
+        label: "Text: Der erste Schritt"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_1
+        label: "Button: Termin anfragen"
+        type: string
+      - name: button_2
+        label: "Button: Pakete vergleichen"
+        type: string
+  - name: seite-preise
+    label: "Seite: Kosten"
+    type: file
+    path: content/seiten/preise.yml
+    fields:
+      - name: seo
+        label: Suchmaschinen und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Titel im Browser-Tab und bei Google
+            type: string
+          - name: beschreibung
+            label: Beschreibung bei Google (etwa 150 Zeichen)
+            type: text
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: kopf
+        label: Seitenkopf
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift (H1)
+            type: string
+          - name: text
+            label: Einleitung
+            type: text
+      - name: text_1
+        label: "Text: Das Kennenlernen ist kostenlos"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_2
+        label: "Text: Schlafsprechstunde"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_1
+        label: "Button: Sprechstunde anfragen"
+        type: string
+      - name: text_3
+        label: "Text: Was genau dazugehört"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_4
+        label: "Text: Unsicher, was passt?"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_2
+        label: "Button: Kennenlernen anfragen"
+        type: string
+      - name: hervorhebung
+        label: Hinweis über dem hervorgehobenen Paket (Intensiv)
+        type: string
+      - name: pakete
+        label: Pakete
+        type: object
+        fields:
+          - name: id
+            label: Kennung
+            type: string
+            readonly: true
+            description: Der Preis kommt aus Einstellungen > Angebote.
+          - name: name
+            label: Name
+            type: string
+            readonly: true
+          - name: dauer
+            label: Dauer
+            type: string
+          - name: text
+            label: Beschreibung
+            type: text
+          - name: leistungen
+            label: Leistungen
+            type: string
+            list: true
+        list:
+          min: 3
+          max: 3
+          collapsible:
+            collapsed: true
+            summary: "{name}"
+  - name: seite-ueber-mich
+    label: "Seite: Über mich"
+    type: file
+    path: content/seiten/ueber-mich.yml
+    fields:
+      - name: seo
+        label: Suchmaschinen und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Titel im Browser-Tab und bei Google
+            type: string
+          - name: beschreibung
+            label: Beschreibung bei Google (etwa 150 Zeichen)
+            type: text
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: kopf
+        label: Seitenkopf
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift (H1)
+            type: string
+          - name: text
+            label: Einleitung
+            type: text
+      - name: text_1
+        label: "Text: Mein Alltag mit kleinen Kindern"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: foto_1
+        label: Foto im Abschnitt
+        type: object
+        fields:
+          - name: bild
+            label: Foto
+            type: image
+            options:
+              media: bilder
+          - name: ausschnitt
+            label: Bildausschnitt
+            type: string
+            description: "Welcher Teil des Fotos sichtbar bleibt: erst waagerecht, dann senkrecht, z. B. 50% 30% (Mitte, eher oben)."
+      - name: text_2
+        label: "Text: Auch bei uns war Einschlafen nicht einfach „Augen zu“"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: abschnitt_1
+        label: "Abschnitt: Meine Qualifikationen"
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: text
+            label: Text darunter (optional)
+            type: text
+      - name: liste_1
+        label: "Liste: Zertifizierte Babyschlafberaterin, Qualifizierte Kindertagespflegeperson, Montessori-Diplom"
+        type: object
+        fields:
+          - name: begriff
+            label: Begriff
+            type: string
+          - name: text
+            label: Text
+            type: text
+            description: Neue Zeile = Zeilenumbruch.
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{begriff}"
+      - name: text_3
+        label: "Text: Wie ich arbeite"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+  - name: seite-fragen
+    label: "Seite: Häufige Fragen"
+    type: file
+    path: content/seiten/fragen.yml
+    fields:
+      - name: seo
+        label: Suchmaschinen und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Titel im Browser-Tab und bei Google
+            type: string
+          - name: beschreibung
+            label: Beschreibung bei Google (etwa 150 Zeichen)
+            type: text
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: kopf
+        label: Seitenkopf
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift (H1)
+            type: string
+          - name: text
+            label: Einleitung
+            type: text
+      - name: text_1
+        label: "Text: Zur Beratung"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: fragen
+        label: Häufige Fragen
+        type: object
+        fields:
+          - name: frage
+            label: Frage
+            type: string
+          - name: antwort
+            label: Antwort
+            type: text
+            description: "**fett** und [Linktext](seite.html) sind möglich."
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{frage}"
+      - name: text_2
+        label: "Text: Kosten, Plätze und Termine"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: fragen_2
+        label: Häufige Fragen (2)
+        type: object
+        fields:
+          - name: frage
+            label: Frage
+            type: string
+          - name: antwort
+            label: Antwort
+            type: text
+            description: "**fett** und [Linktext](seite.html) sind möglich."
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{frage}"
+      - name: text_3
+        label: "Text: Fragen zur Online-Beratung"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: kontaktbereich_titel
+        label: Überschrift im Kontaktbereich unten
+        type: string
+  - name: seite-kontakt
+    label: "Seite: Termin anfragen"
+    type: file
+    path: content/seiten/kontakt.yml
+    fields:
+      - name: seo
+        label: Suchmaschinen und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Titel im Browser-Tab und bei Google
+            type: string
+          - name: beschreibung
+            label: Beschreibung bei Google (etwa 150 Zeichen)
+            type: text
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: kopf
+        label: Seitenkopf
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift (H1)
+            type: string
+          - name: text
+            label: Einleitung
+            type: text
+      - name: text_1
+        label: "Text: So erreicht ihr mich"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: liste_1
+        label: "Liste: Telefon, E-Mail, Gesprächszeiten"
+        type: object
+        fields:
+          - name: begriff
+            label: Begriff
+            type: string
+          - name: text
+            label: Text
+            type: text
+            description: Neue Zeile = Zeilenumbruch.
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{begriff}"
+      - name: text_2
+        label: "Text: .small Eine Anfrage ist keine feste Buchung und löst …"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_3
+        label: "Text: Eure Terminanfrage"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_4
+        label: "Text: Ich melde mich in der Regel innerhalb von 24 Stunden per …"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_5
+        label: "Text: Deine Anfrage ist aber fertig vorbereitet. Öffne den …"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_6
+        label: "Text: .small Mit „In Gmail öffnen“ wird der Entwurf an Google …"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_7
+        label: "Text: Termin per E-Mail anfragen"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_8
+        label: "Text: email"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_9
+        label: "Text: So geht es nach eurer Anfrage weiter"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_10
+        label: "Text: Gut zu wissen"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: button_1
+        label: "Button: Zum Ablauf"
+        type: string
+  - name: seite-baby-einschlafen
+    label: "Seite: Ratgeber: Baby einschlafen"
+    type: file
+    path: content/seiten/baby-einschlafen.yml
+    fields:
+      - name: seo
+        label: Suchmaschinen und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Titel im Browser-Tab und bei Google
+            type: string
+          - name: beschreibung
+            label: Beschreibung bei Google (etwa 150 Zeichen)
+            type: text
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: kopf
+        label: Seitenkopf
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift (H1)
+            type: string
+          - name: text
+            label: Einleitung
+            type: text
+      - name: artikel
+        label: "Artikel: Bild, Lesezeit, Hinweis und Inhaltsverzeichnis"
+        type: object
+        fields:
+          - name: bild
+            label: Artikelbild
+            type: image
+            options:
+              media: bilder
+          - name: lesezeit
+            label: Lesezeit in Minuten
+            type: number
+            options:
+              min: 1
+          - name: hinweis
+            label: Hinweis am Ende des Artikels
+            type: text
+          - name: inhalt
+            label: Inhaltsverzeichnis
+            type: object
+            fields:
+              - name: anker
+                label: Anker
+                type: string
+                description: "Muss zur Überschrift im Text passen, dort steht z. B. ## Überschrift {#anker}"
+              - name: titel
+                label: Eintrag
+                type: string
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{titel}"
+      - name: text_1
+        label: "Text: Warum Einschlafen für Babys so anspruchsvoll ist"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: fragen
+        label: Häufige Fragen
+        type: object
+        fields:
+          - name: frage
+            label: Frage
+            type: string
+          - name: antwort
+            label: Antwort
+            type: text
+            description: "**fett** und [Linktext](seite.html) sind möglich."
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{frage}"
+      - name: kontaktbereich_titel
+        label: Überschrift im Kontaktbereich unten
+        type: string
+  - name: seite-baby-durchschlafen
+    label: "Seite: Ratgeber: Baby schläft nicht durch"
+    type: file
+    path: content/seiten/baby-durchschlafen.yml
+    fields:
+      - name: seo
+        label: Suchmaschinen und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Titel im Browser-Tab und bei Google
+            type: string
+          - name: beschreibung
+            label: Beschreibung bei Google (etwa 150 Zeichen)
+            type: text
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: kopf
+        label: Seitenkopf
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift (H1)
+            type: string
+          - name: text
+            label: Einleitung
+            type: text
+      - name: artikel
+        label: "Artikel: Bild, Lesezeit, Hinweis und Inhaltsverzeichnis"
+        type: object
+        fields:
+          - name: bild
+            label: Artikelbild
+            type: image
+            options:
+              media: bilder
+          - name: lesezeit
+            label: Lesezeit in Minuten
+            type: number
+            options:
+              min: 1
+          - name: hinweis
+            label: Hinweis am Ende des Artikels
+            type: text
+          - name: inhalt
+            label: Inhaltsverzeichnis
+            type: object
+            fields:
+              - name: anker
+                label: Anker
+                type: string
+                description: "Muss zur Überschrift im Text passen, dort steht z. B. ## Überschrift {#anker}"
+              - name: titel
+                label: Eintrag
+                type: string
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{titel}"
+      - name: text_1
+        label: "Text: Was „Durchschlafen“ eigentlich bedeutet"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: fragen
+        label: Häufige Fragen
+        type: object
+        fields:
+          - name: frage
+            label: Frage
+            type: string
+          - name: antwort
+            label: Antwort
+            type: text
+            description: "**fett** und [Linktext](seite.html) sind möglich."
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{frage}"
+      - name: kontaktbereich_titel
+        label: Überschrift im Kontaktbereich unten
+        type: string
+  - name: seite-schlafwissen
+    label: "Seite: Ratgeber (Überblick)"
+    type: file
+    path: content/seiten/schlafwissen.yml
+    fields:
+      - name: seo
+        label: Suchmaschinen und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Titel im Browser-Tab und bei Google
+            type: string
+          - name: beschreibung
+            label: Beschreibung bei Google (etwa 150 Zeichen)
+            type: text
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: kopf
+        label: Seitenkopf
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift (H1)
+            type: string
+          - name: text
+            label: Einleitung
+            type: text
+      - name: abschnitt_1
+        label: "Abschnitt: Babyschlaf-Ratgeber für Eltern"
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: text
+            label: Text darunter (optional)
+            type: text
+      - name: abschnitt_2
+        label: "Abschnitt: Was ihr über Babyschlaf wissen solltet"
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: text
+            label: Text darunter (optional)
+            type: text
+      - name: text_1
+        label: "Text: Nicht jedes Aufwachen ist ein Problem"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_2
+        label: "Text: Nähe ist keine schlechte Gewohnheit"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_3
+        label: "Text: Der sichere Schlafplatz hat Vorrang"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_4
+        label: "Text: Manche Fragen gehören in die Kinderarztpraxis"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_5
+        label: "Text: Woher die Informationen stammen"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+  - name: seite-impressum
+    label: "Rechtliches: Impressum"
+    type: file
+    path: content/seiten/impressum.yml
+    fields:
+      - name: seo
+        label: Titel und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: text_1
+        label: "Text: Angaben gemäß § 5 DDG"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_2
+        label: "Text: Kontakt"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+  - name: seite-datenschutz
+    label: "Rechtliches: Datenschutz"
+    type: file
+    path: content/seiten/datenschutz.yml
+    fields:
+      - name: seo
+        label: Titel und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: text_1
+        label: "Text: 1. Verantwortliche"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_2
+        label: "Text: 2. Aufruf der Website und Hosting"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+  - name: seite-agb
+    label: "Rechtliches: AGB"
+    type: file
+    path: content/seiten/agb.yml
+    fields:
+      - name: seo
+        label: Titel und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: text_1
+        label: "Text: 1. Anbieterin und Geltungsbereich"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_2
+        label: "Text: 2. Anfrage und Vertragsschluss"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+  - name: seite-widerruf
+    label: "Rechtliches: Widerruf"
+    type: file
+    path: content/seiten/widerruf.yml
+    fields:
+      - name: seo
+        label: Titel und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: text_1
+        label: "Text: Widerrufsbelehrung für Dienstleistungen"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_2
+        label: "Text: An Anna-Lena Korb, Müllersweg 15, 97249 Eisingen, email …"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_3
+        label: "Text: Auf dieser Website werden ausschließlich unverbindliche …"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+  - name: seite-barrierefreiheit
+    label: "Rechtliches: Barrierefreiheit"
+    type: file
+    path: content/seiten/barrierefreiheit.yml
+    fields:
+      - name: seo
+        label: Titel und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: text_1
+        label: "Text: Eine Website, die zugänglich sein soll"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+  - name: seite-bildnachweise
+    label: "Rechtliches: Bildnachweise"
+    type: file
+    path: content/seiten/bildnachweise.yml
+    fields:
+      - name: seo
+        label: Titel und Menü
+        type: object
+        fields:
+          - name: titel
+            label: Überschrift
+            type: string
+          - name: menuename
+            label: Name in der Brotkrümel-Navigation
+            type: string
+      - name: text_1
+        label: "Text: Fotografien von Unsplash"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."
+      - name: text_2
+        label: "Text: Schriften"
+        type: text
+        description: "Leerzeile = neuer Absatz. ## Überschrift, ### kleine Überschrift, - Aufzählung, ✓ Häkchen-Liste, ✗ Kreuz-Liste, **fett**, [Linktext](seite.html). Platzhalter: {{email}}, {{telefon}}."

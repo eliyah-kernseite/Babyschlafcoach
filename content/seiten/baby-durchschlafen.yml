@@ -1,0 +1,81 @@
+seo:
+  titel: Baby schläft nicht durch? Was normal ist & was hilft | Ratgeber
+  beschreibung: Euer Baby wacht nachts oft auf? Was Durchschlafen wirklich bedeutet, häufige Gründe für nächtliches Aufwachen und was ihr ausprobieren könnt.
+  menuename: Baby schläft nicht durch
+kopf:
+  titel: Baby schläft nicht durch? Was normal ist und was ihr tun könnt
+  text: Dass Babys nachts aufwachen, gehört zu ihrer Entwicklung dazu, und trotzdem darf es euch irgendwann zu viel werden. Hier lest ihr, was hinter häufigem Aufwachen stecken kann und wo ihr ansetzen könnt.
+artikel:
+  bild: /assets/bilder/babybett.webp
+  lesezeit: 7
+  hinweis: Die Hinweise in diesem Artikel sind allgemein gehalten. Wenn ihr euch Sorgen um Atmung, Gewicht oder Gesundheit eures Kindes macht, geht bitte zuerst zu eurer Kinderarztpraxis. Eine Schlafberatung kann das nicht ersetzen.
+  inhalt:
+    - anker: bedeutung
+      titel: Was „Durchschlafen“ bedeutet
+    - anker: gruende
+      titel: Häufige Gründe für Aufwachen
+    - anker: ausprobieren
+      titel: Was ihr ausprobieren könnt
+    - anker: limit
+      titel: Wenn ihr am Limit seid
+    - anker: arzt
+      titel: Wann ärztlich abklären?
+    - anker: fragen
+      titel: Häufige Fragen
+text_1: |-
+  ## Was „Durchschlafen“ eigentlich bedeutet {#bedeutung}
+
+  Wenn Eltern von Durchschlafen sprechen, meinen sie oft zehn bis zwölf Stunden am Stück. In Studien wird der Begriff meist viel bescheidener verwendet, nämlich für eine längere Schlafphase von etwa fünf bis sechs Stunden.
+
+  Auch Erwachsene wachen nachts zwischen ihren Schlafzyklen kurz auf, erinnern sich aber meist nicht daran. Babys haben kürzere Schlafzyklen und brauchen beim Übergang häufiger Unterstützung. Viele Kinder wachen deshalb im ersten Lebensjahr und auch danach noch nachts auf, und das ist entwicklungsbedingt normal.
+
+  ## Häufige Gründe für nächtliches Aufwachen {#gruende}
+
+  - Hunger, denn gerade in den ersten Monaten sind Mahlzeiten in der Nacht normal und wichtig.
+  - Entwicklungsschritte wie Krabbeln, Laufen oder Sprechen, außerdem Zahnen oder Trennungsangst. Das alles kann Nächte für eine Weile unruhiger machen.
+  - Die Einschlafbedingungen. Ein Kind, das mit einer bestimmten Hilfe einschläft, erwartet sie oft auch, wenn es nachts aufwacht.
+  - Ein Tagesrhythmus, der noch nicht passt, etwa zu wenig oder sehr später Tagschlaf oder eine ungünstige Schlafenszeit.
+  - Ein Zimmer, das zu warm, zu hell oder zu laut ist. Das BIÖG nennt etwa 18 °C als günstige Temperatur fürs Schlafzimmer.
+  - Infekte oder Schmerzen. Dann geht es erst einmal darum, euer Kind gut zu versorgen, Veränderungen können warten.
+
+  ## Was ihr ausprobieren könnt {#ausprobieren}
+
+  Was hilft, ist von Familie zu Familie verschieden. Mit diesen vier Ansätzen fangen viele aber ganz gut an.
+
+  ### Erst einmal beobachten
+
+  Notiert eine Woche lang Schlafzeiten, Aufwachzeiten und was euer Kind gebraucht hat. Oft zeigt sich ein Muster, etwa ein zu später Mittagsschlaf oder ein Abend, der zu spät beginnt.
+
+  ### Abend und Nacht angleichen
+
+  Wenn sich die Bedingungen beim Einschlafen und beim nächtlichen Aufwachen stark unterscheiden, fällt das Weiterschlafen schwerer. Kleine Veränderungen beim Einschlafen wirken sich häufig auch auf die Nacht aus.
+
+  ### Nachts möglichst wenig Reize
+
+  Macht nachts nur wenig Licht, redet leise und wenig und fangt nicht an zu spielen. So merkt euer Kind, dass jetzt Nacht ist.
+
+  ### Aufgaben teilen
+
+  Wenn möglich, wechselt euch ab oder teilt die Nacht in Schichten auf, damit jeder von euch einmal einen längeren Schlafblock bekommt.
+
+  ## Wenn ihr am Limit seid {#limit}
+
+  Dauerhafter Schlafmangel ist belastend. Wenn ihr merkt, dass euch die Kraft ausgeht, nehmt das ernst und holt euch Unterstützung: im Umfeld, bei eurer Hebamme oder Kinderarztpraxis oder bei den Frühen Hilfen eurer Stadt oder eures Landkreises, die Familien mit kleinen Kindern begleiten.
+
+  Eine [Schlafberatung](schlafberatung.html) kann euch helfen, eure Situation zu sortieren und realistische nächste Schritte zu finden. Schreienlassen gehört bei mir nicht dazu, und versprechen, dass euer Kind danach durchschläft, kann ich euch auch nicht.
+
+  ## Wann ihr ärztlich abklären solltet {#arzt}
+
+  Lasst euer Kind kinderärztlich anschauen, wenn ihr zum Beispiel lautes Schnarchen, Atempausen oder angestrengtes Atmen im Schlaf bemerkt, wenn euer Kind Schmerzen zu haben scheint, schlecht trinkt oder isst oder sich sein Schlaf plötzlich stark verändert, ohne dass ihr einen Grund erkennt.
+
+  Hintergrund zum Schlaf im ersten Lebensjahr: [BIÖG: Schlafen im ersten Lebensjahr](https://www.kindergesundheit-info.de/themen/schlafen/0-12-monate/).
+
+  ## Häufige Fragen zum Durchschlafen {#fragen}
+fragen:
+  - frage: Ab wann schlafen Babys durch?
+    antwort: Das ist sehr unterschiedlich. Viele Kinder wachen im ersten Lebensjahr und auch danach noch nachts auf, und das ist für ihre Entwicklung normal. Ein Stichtag hilft euch da wenig. Wichtiger ist die Frage, ob die Nächte für eure Familie gerade machbar sind.
+  - frage: Muss ich abstillen, damit mein Kind durchschläft?
+    antwort: Nein. Stillen ist nicht automatisch schuld daran, dass ein Kind oft aufwacht, und für eine Schlafberatung müsst ihr nicht abstillen. Wenn euch das nächtliche Stillen zu viel wird, suchen wir zusammen nach Wegen, die zu euch passen.
+  - frage: Kann eine Schlafberatung Durchschlafen garantieren?
+    antwort: Nein, und ehrlich gesagt sollte das auch niemand versprechen. Schlaf entwickelt sich bei jedem Kind anders. Eine gute Beratung hilft euch, eure Situation zu sortieren, und begleitet euch auf dem Weg zu einem Ziel, das realistisch ist.
+kontaktbereich_titel: Ihr wünscht euch ruhigere Nächte?

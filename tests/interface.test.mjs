@@ -84,7 +84,7 @@ test('Request is sent to the form service and confirms delivery', async () => {
   assert.equal(body.email,'test@example.invalid');
   assert.equal(body.botcheck,'');
   assert.match(body.subject,/Basis von Test Familie/);
-  assert.match(body.message,/149 Euro/);
+  assert.ok(body.message.includes(`Basis (${offers.find(o=>o.id==='Basis').price} Euro)`));
   assert.equal(doc.querySelector('#request-sent').hidden,false);
   assert.equal(doc.querySelector('#booking-form').hidden,true);
   assert.equal(doc.querySelector('#request-result').hidden,true);
