@@ -1,0 +1,62 @@
+# Fuer das Hosting bei Hostinger (Apache/LiteSpeed) unter https://babyschlaf-coach.de/.
+
+Options -Indexes
+ErrorDocument 404 /404.html
+
+# Interne Verzeichnisse nicht ausliefern.
+<IfModule mod_alias.c>
+  RedirectMatch 404 ^/private/
+  RedirectMatch 404 ^/vendor/
+  # Quellcode, Tests und Arbeitsdateien gehoeren nicht auf die Website.
+  RedirectMatch 404 ^/(src|tests|scripts|docs|node_modules|test-results)(/|$)
+  RedirectMatch 404 ^/(package\.json|package-lock\.json|README\.md|[^/]+\.zip)$
+</IfModule>
+
+# www auf die Hauptadresse ohne www umleiten (Schema bleibt erhalten).
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.babyschlaf-coach\.de$ [NC]
+  RewriteCond %{HTTPS} on
+  RewriteRule ^ https://babyschlaf-coach.de%{REQUEST_URI} [R=301,L]
+  RewriteCond %{HTTP_HOST} ^www\.babyschlaf-coach\.de$ [NC]
+  RewriteRule ^ http://babyschlaf-coach.de%{REQUEST_URI} [R=301,L]
+
+  # Saubere Adressen: /index.html auf / und /seite.html auf /seite umleiten
+  # (die Google-Bestaetigungsdatei bleibt unter ihrem Namen erreichbar).
+  RewriteCond %{THE_REQUEST} \s/+index\.html[\s?#]
+  RewriteRule ^ / [R=301,L]
+  RewriteCond %{REQUEST_URI} !^/google[0-9a-f]+\.html$
+  RewriteCond %{THE_REQUEST} \s/+([a-z0-9-]+)\.html[\s?#]
+  RewriteRule ^ /%1 [R=301,L]
+  # /seite liefert intern die Datei seite.html aus.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^([a-z0-9-]+)$ $1.html [L]
+</IfModule>
+
+# CSS und JS tragen eine Versionsnummer in der Adresse und duerfen lange zwischengespeichert werden.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# Manche Server setzen fuer JS nur 7 Tage. Versionierte Dateien deshalb ausdruecklich ein Jahr cachen.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|woff2)$">
+    Header set Cache-Control "public, max-age=31536000"
+  </FilesMatch>
+</IfModule>
+
+# Punktdateien (.htaccess, .nojekyll, .git*) nicht ausliefern.
+<IfModule mod_authz_core.c>
+  <FilesMatch "^\.">
+    Require all denied
+  </FilesMatch>
+</IfModule>
