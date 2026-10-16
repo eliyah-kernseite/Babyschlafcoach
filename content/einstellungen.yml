@@ -1,0 +1,63 @@
+kontakt:
+  email: babyschlafcoach.annalena@gmail.com
+  telefon_anzeige: 0173 2584141
+  telefon_nummer: "+491732584141"
+  kinderkoerbchen_url: https://xn--kinderkrbchen-omb.com/
+angebote:
+  - id: Kennenlernen
+    name: Kostenloses Kennenlernen
+    preis: 0
+    minuten: 20
+    leistung: 20 Minuten per Zoom oder Telefon
+  - id: Sprechstunde
+    name: Schlafsprechstunde
+    preis: 89
+    minuten: 45
+    leistung: 45 Minuten für ein konkretes Thema mit kurzer schriftlicher Zusammenfassung
+  - id: Basis
+    name: Basis
+    preis: 149
+    minuten: 60
+    leistung: 60 Minuten Beratung, schriftlicher Plan und 7 Tage Begleitung
+  - id: Intensiv
+    name: Intensiv
+    preis: 299
+    minuten: 60
+    leistung: 60 Minuten Beratung, Plan, 3 Folgegespräche und 3 Wochen Begleitung
+  - id: Premium
+    name: Premium
+    preis: 479
+    minuten: 60
+    leistung: 60 Minuten Beratung, Plan, 5 Folgegespräche und 6 Wochen Begleitung
+kopfzeile:
+  text: Babyschlafberatung online in ganz Deutschland · persönlich im Raum Würzburg
+  zeiten: Mo–Fr 17–19 · Sa 9–13 Uhr
+fusszeile:
+  text: Persönliche Babyschlafberatung ohne Schreienlassen, online per Zoom und Telefon für Familien in ganz Deutschland. In Würzburg und Umgebung auch vor Ort nach Absprache.
+  adresse: |-
+    Anna-Lena Korb
+    Müllersweg 15
+    97249 Eisingen
+  zeiten: Mo–Fr 17–19 Uhr, Sa 9–13 Uhr
+  copyright: © 2026 Anna-Lena Korb · Babyschlafberatung
+kontaktbereich:
+  titel: Kostenloses Kennenlernen vereinbaren
+  text: Erzählt mir, was eure Nächte gerade so schwer macht. Im kostenlosen Kennenlernen haben wir 20 Minuten Zeit, um zu schauen, ob und wie ich euch helfen kann, per Zoom oder am Telefon und egal, wo in Deutschland ihr wohnt.
+  button: Termin anfragen
+  zeiten: Mo–Fr 17–19 Uhr, Sa 9–13 Uhr
+  standort: Eisingen bei Würzburg, online in ganz Deutschland
+kinderkoerbchen:
+  vorzeile: Kinderkörbchen
+  titel: Meine Kindertagespflege in Eisingen
+  text: Im Kinderkörbchen betreue ich seit 2010 Kinder in einer kleinen, familiären Gruppe. Das meiste, was ich über Schlaf und Eingewöhnung weiß, habe ich hier im Alltag gelernt. Alles zur Betreuung steht auf der eigenen Webseite der Kindertagespflege.
+  button: Zur Webseite des Kinderkörbchens
+  fakten:
+    - begriff: Seit
+      text: "2010"
+    - begriff: Ort
+      text: Eisingen bei Würzburg
+    - begriff: Begleitete Kinder
+      text: rund 100, überwiegend 0 bis 3 Jahre
+portraet:
+  zitat: Bevor wir einen Plan machen, höre ich euch erst einmal zu. Er soll ja zu eurem Kind und zu eurem Alltag passen.
+  unterzeile: Babyschlafberaterin in Eisingen bei Würzburg

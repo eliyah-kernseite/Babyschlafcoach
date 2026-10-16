@@ -1,0 +1,31 @@
+fotos:
+  - bild: /assets/bilder/hero.webp
+    beschreibung: Ein Vater küsst sein neugeborenes Baby zärtlich auf den Kopf.
+    motiv: Vater küsst sein Neugeborenes
+    fotograf: Ana Curcan
+    quelle: https://unsplash.com/photos/a-loving-father-kisses-his-newborn-babys-head-wYYjCdLENyQ
+  - bild: /assets/bilder/nacht.webp
+    beschreibung: Eine Mutter hält ihr Baby in einem dunklen Zimmer nah bei sich.
+    motiv: Mutter mit Baby im abgedunkelten Zimmer
+    fotograf: Jenna Norman
+    quelle: https://unsplash.com/photos/woman-carrying-baby-8ybZT29CaoA
+  - bild: /assets/bilder/online.webp
+    beschreibung: Eine Mutter sitzt mit ihrem Baby auf dem Schoß lächelnd vor einem Laptop.
+    motiv: Mutter mit Baby am Laptop
+    fotograf: Brian Wangenheim
+    quelle: https://unsplash.com/photos/girl-in-gray-hoodie-sitting-on-chair-2pRimVfww38
+  - bild: /assets/bilder/troesten.webp
+    beschreibung: Ein Vater hält sein weinendes Baby im Strickpullover an der Schulter und tröstet es.
+    motiv: Vater tröstet sein weinendes Baby
+    fotograf: Toa Heftiba
+    quelle: https://unsplash.com/photos/a-man-holding-a-baby-in-his-arms-BgfxafkXjds
+  - bild: /assets/bilder/einschlafen.webp
+    beschreibung: Ein Neugeborenes schläft ruhig auf dem Unterarm eines Erwachsenen, der seinen Kopf stützt.
+    motiv: Neugeborenes schläft im Arm
+    fotograf: Steph Quernemoen
+    quelle: https://unsplash.com/photos/a-newborn-baby-sleeping-peacefully-in-a-persons-arms-wwJnK-ItaKI
+  - bild: /assets/bilder/babybett.webp
+    beschreibung: Ein Neugeborenes schläft in Rückenlage im eigenen Bett, ohne Kissen und Decke, darüber hängt ein Mobile.
+    motiv: Neugeborenes schläft in Rückenlage im Babybett
+    fotograf: Ana Curcan
+    quelle: https://unsplash.com/photos/newborn-baby-sleeping-peacefully-in-a-crib-9_5P8JjSxIk

@@ -1,7 +1,7 @@
 name: Branch live aktualisieren
 
-# Jeder Push auf main baut und prüft die Website und legt danach nur die
-# Dateien, die online gehen sollen, auf den Branch `live`. Hostinger zieht
+# Jeder Push auf main (auch jedes Speichern in Pages CMS) baut und prüft die Website
+# und legt danach nur die Dateien, die online gehen sollen, auf den Branch `live`. Hostinger zieht
 # diesen Branch per Git-Bereitstellung nach public_html.
 on:
   push:
@@ -33,9 +33,24 @@ jobs:
         run: |
           npm ci --ignore-scripts
           npm run build
-          # Die erzeugten HTML-Dateien müssen zum Stand in main passen.
-          git diff --exit-code -- '*.html' sitemap.xml robots.txt
           npm test
+
+      # Änderungen aus Pages CMS betreffen nur content/ und assets/bilder/. Die daraus gebauten
+      # Seiten und Bildversionen werden hier nach main zurückgeschrieben, damit main vollständig bleibt.
+      - name: Gebaute Dateien in main speichern
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -A -- '*.html' sitemap.xml robots.txt assets content
+          if git diff --cached --quiet; then
+            echo "Gebaute Dateien sind bereits aktuell."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Seiten aus geänderten Inhalten neu gebaut"
+          # Kam inzwischen eine weitere Änderung dazu, baut deren eigener Lauf alles erneut.
+          git push origin HEAD:main || echo "::warning::main hat sich geändert, der nächste Lauf übernimmt."
 
       - name: Veröffentlichungspaket zusammenstellen
         shell: bash
@@ -46,7 +61,7 @@ jobs:
           git archive HEAD | tar x -C "$paket"
           cd "$paket"
           # Quellcode, Tests und Arbeitsdateien gehören nicht auf die Website.
-          rm -rf .github src tests scripts docs .gitignore .nojekyll README.md package.json package-lock.json ./*.zip
+          rm -rf .github src tests scripts docs content assets/bilder .gitignore .nojekyll .pages.yml README.md package.json package-lock.json ./*.zip
           test -f index.html
           test -f .htaccess
 

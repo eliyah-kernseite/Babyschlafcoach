@@ -4,10 +4,12 @@ import { addDays, availableTimes, composeRequest, dateBounds, localParts, parseD
 import { site, offers } from '../assets/config.js';
 
 const sunday = new Date('2026-09-13T08:00:00Z');
-test('Confirmed email, price ladder and appointment lengths', () => {
-  assert.equal(site.email, 'babyschlafcoach.annalena@gmail.com');
-  assert.deepEqual(offers.map(o => o.price), [0, 89, 149, 299, 479]);
-  assert.deepEqual(offers.map(o => o.minutes), [20, 45, 60, 60, 60]);
+// Email, prices and lengths are edited in Pages CMS (content/einstellungen.yml), so only their shape is fixed here.
+test('Email, price ladder and appointment lengths', () => {
+  assert.match(site.email, /^[^@\s]+@[^@\s]+\.[a-z]{2,}$/);
+  assert.deepEqual(offers.map(o => o.id), ['Kennenlernen', 'Sprechstunde', 'Basis', 'Intensiv', 'Premium']);
+  assert.equal(offers[0].price, 0);
+  for (const o of offers) assert.ok(Number.isFinite(o.price) && o.price >= 0 && Number.isInteger(o.minutes) && o.minutes > 0, o.id);
 });
 test('Berlin date is independent of visitor timezone, with DST', () => {
   assert.deepEqual(localParts(new Date('2026-06-01T22:30:00Z')), {date: '2026-06-02', minutes: 30});

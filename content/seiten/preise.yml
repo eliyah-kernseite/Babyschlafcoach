@@ -1,0 +1,70 @@
+seo:
+  titel: "Babyschlafberatung Kosten & Preise: ab 89 € | Anna-Lena Korb"
+  beschreibung: "Gesamtpreise ohne Abo: Sprechstunde 89 €, Basis 149 €, Intensiv 299 €, Premium 479 €. Mit Schlafplan, Begleitung und kostenlosem Kennenlernen."
+  menuename: Kosten
+kopf:
+  titel: Kosten und Pakete der Schlafberatung
+  text: Ob ihr nur ein bestimmtes Thema klären oder euch über mehrere Wochen begleiten lassen wollt, entscheidet ihr nach dem kostenlosen Kennenlernen in Ruhe. Alle Beträge hier sind Gesamtpreise.
+text_1: |-
+  ## Das Kennenlernen ist kostenlos
+
+  In 20 Minuten sprechen wir über eure Situation und schauen, ob mein Angebot zu euch passt. Ihr müsst danach weder etwas bezahlen noch ein Paket buchen. Die drei Pakete unterscheiden sich vor allem darin, wie lange ich euch begleite.
+text_2: |-
+  ## Schlafsprechstunde
+
+  Für eine einzelne, konkrete Frage: 45 Minuten per Zoom zu einem klar abgegrenzten Thema, danach bekommt ihr eine kurze schriftliche Zusammenfassung. Einen vollständigen Schlafplan oder eine WhatsApp-Begleitung im Anschluss gibt es bei der Sprechstunde nicht.
+button_1: Sprechstunde anfragen
+text_3: |-
+  ## Was genau dazugehört
+
+  ### WhatsApp-Begleitung
+
+  Die WhatsApp-Begleitung gilt nur im gebuchten Zeitraum. Ich antworte in der Regel innerhalb von 24 Stunden, auf Nachrichten vom Sonntag oder einem Feiertag am nächsten Beratungstag. Für Notfälle oder als Live-Chat ist sie nicht gedacht.
+
+  ### Der schriftliche Plan
+
+  Euren Schlafplan bekommt ihr innerhalb von 24 Stunden nach dem Beratungsgespräch, sofern die vereinbarten Unterlagen vollständig vorliegen. Er baut auf euren Angaben auf. Die Begleitzeit beginnt an dem Termin, den wir gemeinsam festlegen.
+
+  ### Vertrag und Bezahlung
+
+  Bevor etwas Geld kostet, bekommt ihr von mir Leistungsumfang, Preis und die Vertragsinformationen. Wie ihr bezahlt, ob eine Ratenzahlung möglich ist und wie wir mit Terminänderungen umgehen, besprechen wir persönlich. Eine Anfrage über diese Seite ist noch kein Vertrag, und eine Begleitung verlängert sich nie automatisch.
+
+  Ich begleite höchstens drei Familien gleichzeitig. Ob gerade ein Platz frei ist, klären wir persönlich. Es gelten die [AGB](agb.html) und das [Widerrufsrecht](widerruf.html).
+text_4: |-
+  ### Unsicher, was passt?
+
+  Genau dafür ist das Kennenlernen da. Wir finden zusammen heraus, ob eine Sprechstunde reicht oder eine längere Begleitung mehr Sinn ergibt.
+button_2: Kennenlernen anfragen
+hervorhebung: Mit regelmäßigen Folgegesprächen
+pakete:
+  - id: basis
+    name: Basis
+    dauer: Beratung + 7 Tage Begleitung
+    text: Ihr möchtet verstehen, was bei euch gerade los ist, und dann mit einem konkreten Plan anfangen.
+    leistungen:
+      - Ausführlicher Fragebogen und Auswertung
+      - 60 Minuten per Zoom oder Telefon
+      - Individueller schriftlicher Schlafplan innerhalb von 24 Stunden nach dem Gespräch
+      - 7 Tage WhatsApp-Begleitung für Rückfragen
+  - id: intensiv
+    name: Intensiv
+    dauer: 3 Wochen Begleitung
+    text: Ihr wollt neue Abläufe ausprobieren und unterwegs regelmäßig Rückmeldung bekommen.
+    leistungen:
+      - Fragebogen, Schlafprotokoll und Auswertung
+      - 60 Minuten Erstberatung per Zoom oder Telefon
+      - Individueller Plan innerhalb von 24 Stunden
+      - 3 Folgegespräche à 30 Minuten
+      - 3 Wochen WhatsApp-Begleitung
+      - Anpassungen des Plans während der Begleitung
+  - id: premium
+    name: Premium
+    dauer: 6 Wochen Begleitung
+    text: Für Familien, die sich über längere Zeit begleiten lassen und dabei regelmäßig im Austausch bleiben möchten.
+    leistungen:
+      - Fragebogen, Schlafprotokoll und Auswertung
+      - 60 Minuten Erstberatung per Zoom oder Telefon
+      - Individueller Plan innerhalb von 24 Stunden
+      - 5 Folgegespräche à 30 Minuten
+      - 6 Wochen WhatsApp-Begleitung
+      - Regelmäßige Auswertung und Plananpassungen

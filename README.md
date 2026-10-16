@@ -18,6 +18,27 @@ Vorschau: http://localhost:4173/Babyschlafcoach/
 Auch http://localhost:4173/ funktioniert. Den Server mit Strg+C beenden.
 
 Nach Inhaltsänderungen immer neu bauen und die erzeugten HTML-Dateien mit committen.
+Bei Änderungen aus Pages CMS übernimmt das der Workflow automatisch (siehe unten).
+
+## Inhalte bearbeiten mit Pages CMS
+
+Texte, Preise, Kontaktdaten und Fotos stehen in `content/` (YAML) und werden in
+[Pages CMS](https://app.pagescms.org) bearbeitet. Welche Felder dort erscheinen,
+legt `.pages.yml` fest. Jedes Speichern ist ein Commit auf main. Der Workflow
+„Branch live aktualisieren“ baut danach die Seiten, schreibt die erzeugten
+HTML-Dateien und Bildversionen nach main zurück und veröffentlicht auf `live`.
+
+- Fließtexte nutzen ein kleines Textformat (src/text.mjs): Leerzeile = neuer Absatz,
+  `## Überschrift`, `### Überschrift`, `- Punkt`, `✓ Punkt`, `✗ Punkt`, `**fett**`,
+  `[Linktext](seite.html)`, `{.lead}` am Absatzanfang für eine CSS-Klasse und
+  Platzhalter wie `{{email}}` oder `{{telefon}}`.
+- Fotos werden in Pages CMS nach `assets/bilder/` hochgeladen. `npm run build`
+  erzeugt daraus `assets/name-640/768/960/1440.webp` (scripts/images.mjs, sharp).
+  Bildbeschreibung und Bildnachweis stehen in `content/fotos.yml`.
+- Wer ein Feld im Code ergänzt, muss es auch in `.pages.yml` eintragen. Pages CMS
+  schreibt beim Speichern nur Felder zurück, die dort beschrieben sind.
+- Fest im Code bleiben Layout, Navigation, Formularbeschriftungen, Termin-Logik
+  (Zeiten in src/content.mjs) und strukturierte Daten.
 Die bestehenden GitHub-Pages-Einstellungen bleiben unverändert:
 main, Repository-Wurzel. Änderungen auf einem anderen Branch sind noch nicht live.
 
@@ -25,10 +46,14 @@ main, Repository-Wurzel. Änderungen auf einem anderen Branch sind noch nicht li
 
 | Pfad | Aufgabe |
 | --- | --- |
-| src/pages.mjs | Startseite, Online-Beratung, Person, Ablauf, Preise, Kontakt, Ratgeber (Einschlafen, Durchschlafen, Schlafwissen), 404 |
+| content/ | Alle Texte, Preise, Kontaktdaten, Fotoliste (bearbeitet in Pages CMS) |
+| .pages.yml | Felder und Bezeichnungen in Pages CMS |
+| src/content.mjs | Liest content/, feste technische Werte, Bildmaße |
+| src/text.mjs | Textformat der Inhaltsdateien |
+| src/pages.mjs | Markup für Startseite, Online-Beratung, Person, Ablauf, Preise, Kontakt, Ratgeber (Einschlafen, Durchschlafen, Schlafwissen), 404 |
 | src/layout.mjs | Navigation, Footer, Metadaten, strukturierte Daten (FAQ, Breadcrumb, Service, Artikel), Fotoliste, Porträt-Karte |
 | src/legal.mjs | Impressum, Datenschutz, AGB, Widerruf, Zugänglichkeit, Bildnachweise |
-| assets/config.js | Öffentliche E-Mail, Telefonnummer, Basis-URL, Zeiten, Preise |
+| assets/config.js | Wird beim Bauen aus content/einstellungen.yml erzeugt (E-Mail, Telefon, Preise für das Terminformular) |
 | assets/booking.js | Reine Kalenderlogik, Datum, Dauer, Ersatz-Entwurf |
 | assets/site.js | Menü, Scroll-Animationen, Inhaltsverzeichnis, interaktive Terminanfrage |
 | assets/site.css | Gestaltung (Newsreader + Manrope), responsiv, Motion, reduzierte Bewegung |
@@ -45,7 +70,7 @@ main, Repository-Wurzel. Änderungen auf einem anderen Branch sind noch nicht li
    aktuellen deutschen Uhrzeit. Anfragen bis 90 Tage voraus. Zeitzone Europe/Berlin.
 4. Kontaktdaten ergänzen und **Anfrage senden**. Der Browser schickt die Anfrage an
    Web3Forms (api.web3forms.com), das sie per E-Mail an Anna-Lenas Gmail-Adresse
-   weiterleitet. Der Zugangsschlüssel steht als `formKey` in assets/config.js; er ist
+   weiterleitet. Der Zugangsschlüssel steht als `formKey` in src/content.mjs; er ist
    öffentlich gedacht und erlaubt nur den Versand an die bei Web3Forms bestätigte Adresse.
    In Web3Forms die Aufbewahrung auf 7 Tage stellen (so steht es im Datenschutz).
 5. Ist kein `formKey` gesetzt oder klappt der Versand nicht, zeigt die Seite den
@@ -58,11 +83,11 @@ Niemals Zugangsdaten in assets/config.js oder andere öffentliche Dateien setzen
 
 ## Fotos und Zertifikat
 
-Alle Fotos stammen von Unsplash (Unsplash-Lizenz) und liegen lokal in assets/
-als name-640/960/1440.webp. Welche Fotos verwendet werden, steht in der Liste
-`photos` in src/layout.mjs; die Seite Bildnachweise wird daraus erzeugt.
-Neues Foto: Dateien ablegen, Eintrag mit Fotograf, Unsplash-Link und
-Alternativtext ergänzen, mit `photo('name')` einbinden, neu bauen. Nur Fotos mit
+Die Originale liegen in assets/bilder/, die Webseite nutzt die daraus erzeugten
+Versionen assets/name-640/768/960/1440.webp. Bildbeschreibung, Fotograf und Quelle
+stehen in content/fotos.yml; die Seite Bildnachweise wird daraus erzeugt.
+Neues Foto: in Pages CMS hochladen, in content/fotos.yml beschreiben und im
+gewünschten Bildfeld auswählen. Nur Fotos mit
 kostenloser Unsplash-Lizenz verwenden (kein Unsplash+), und bei schlafenden Babys
 auf sichere Schlafsituationen achten (Rückenlage, keine Kissen oder Decken).
 
@@ -91,7 +116,7 @@ Nach dem Livegang die Sitemap in der Google Search Console einreichen.
 Die kanonische Basis-URL ist aktuell:
 https://babyschlaf-coach.de/
 
-Bei einem späteren Domainwechsel site.url in assets/config.js ändern und neu
+Bei einem späteren Domainwechsel site.url in src/content.mjs ändern und neu
 bauen. Danach Canonical, Sitemap, strukturierte Daten und 404-Seite kontrollieren.
 Der Review-Branch ist nicht automatisch eine zweite Live-Website.
 

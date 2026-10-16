@@ -1,0 +1,44 @@
+seo:
+  titel: Häufige Fragen zur Schlafberatung (FAQ) | Anna-Lena Korb
+  beschreibung: "Antworten auf häufige Fragen zur Babyschlafberatung: Alter, Schreienlassen, Abstillen, Kosten, Termine, Antwortzeiten und Grenzen der Beratung."
+  menuename: Häufige Fragen
+kopf:
+  titel: Häufige Fragen zur Schlafberatung
+  text: Hier habe ich die Fragen gesammelt, die rund um die Schlafberatung immer wieder auftauchen. Falls eure nicht dabei ist, schreibt mir einfach.
+text_1: |-
+  ## Zur Beratung
+
+  Für welches Alter sie gedacht ist, wie ich vorgehe und was ihr von einer Schlafberatung erwarten könnt.
+fragen:
+  - frage: Für welches Alter ist die Beratung gedacht?
+    antwort: Ich begleite Familien mit Kindern bis sechs Jahre, bei älteren Kindern sprechen wir vorher kurz darüber. Von Neugeborenen erwartet niemand, dass sie allein einschlafen oder durchschlafen. In den ersten Wochen geht es um Orientierung, einen sicheren Schlafplatz und darum, euch als Eltern zu entlasten. Was wir uns vornehmen, hängt immer davon ab, wie alt euer Kind ist und wo es in seiner Entwicklung gerade steht.
+  - frage: Muss mein Kind alleine weinen?
+    antwort: Nein. Kontrolliertes Schreienlassen gehört nicht zu meiner Beratung. Es kann natürlich sein, dass euer Kind eine Veränderung erst einmal doof findet und das auch deutlich zeigt. Dann tröstet ihr es, so wie sonst auch. Wir haben einen klaren Plan, und trotzdem seid ihr für euer Kind da, wenn es euch braucht.
+  - frage: Müssen wir abstillen oder alles sofort verändern?
+    antwort: Nein. Wenn euer Kind beim Stillen, mit Schnuller oder in eurer Begleitung einschläft, ist das erst einmal kein Problem. Wir schauen ehrlich hin, was euch wirklich belastet und was ihr ändern wollt. Abstillen oder den Schlafplatz wechseln müsst ihr dafür nicht. Bei Säuglingen gehen Ernährung und ein sicherer Schlafplatz sowieso immer vor.
+  - frage: Versprichst du, dass unser Kind danach durchschläft?
+    antwort: Nein, das kann ehrlicherweise niemand. Zusagen kann ich euch eine persönliche Begleitung und Schritte, die ihr nachvollziehen könnt. Wie schnell sich etwas verändert, ist bei jedem Kind anders, deshalb setzen wir uns realistische Ziele und schauen unterwegs gemeinsam, was bei euch funktioniert.
+  - frage: Wie funktioniert das Kennenlernen?
+    antwort: Ihr fragt einen Termin an, mindestens sieben Tage im Voraus. Das Gespräch dauert 20 Minuten und kostet nichts. Ob ihr danach weitermachen wollt und mit welchem Angebot, entscheidet ihr in Ruhe. Mit der Anfrage geht ihr keine Zahlungspflicht ein.
+  - frage: Funktioniert die Beratung auch, wenn wir nicht in der Nähe wohnen?
+    antwort: Ja. Die Gespräche laufen per Zoom oder Telefon, da spielt es keine Rolle, wo in Deutschland ihr wohnt. Wer in Würzburg oder im Umkreis von etwa 10 bis 15 Kilometern lebt, kann nach Absprache auch einen persönlichen Termin bekommen. Anfahrtskosten kommen dafür nicht dazu.
+  - frage: Wann bekomme ich eine Antwort?
+    antwort: Meine Beratungszeiten sind montags bis freitags von 17 bis 19 Uhr und samstags von 9 bis 13 Uhr. Auf Anfragen und auf WhatsApp-Nachrichten in der Begleitzeit antworte ich in der Regel innerhalb von 24 Stunden. Was sonntags oder an einem Feiertag kommt, beantworte ich am nächsten Beratungstag. Rund um die Uhr erreichbar bin ich im Chat also nicht.
+  - frage: Was ist bei gesundheitlichen Beschwerden?
+    antwort: Meine Schlafberatung ersetzt keine ärztliche Untersuchung, Diagnose oder Behandlung. Wenn ihr vermutet, dass etwas Gesundheitliches hinter dem schlechten Schlaf steckt, ist eure Kinderarztpraxis die richtige Anlaufstelle. Ein Notfalldienst ist die Beratung auch nicht.
+text_2: |-
+  ## Kosten, Plätze und Termine
+
+  Was die Beratung kostet und wie ihr einen Platz bekommt.
+fragen_2:
+  - frage: Was kostet die Schlafberatung?
+    antwort: Das Kennenlernen kostet nichts. Die Schlafsprechstunde kostet 89 €, die Pakete Basis 149 €, Intensiv 299 € und Premium 479 €. Das sind jeweils Gesamtpreise, ein Abo gibt es nicht. Was in welchem Paket drin ist, seht ihr unter [Kosten](preise.html).
+  - frage: Was ist, wenn wir einen Termin verschieben müssen?
+    antwort: Mit kleinen Kindern kommt das vor, ganz klar. Gebt mir bitte so früh wie möglich Bescheid. Bis 24 Stunden vor dem Termin könnt ihr kostenfrei verschieben, die Einzelheiten stehen in den [AGB](agb.html).
+  - frage: Wie viele Familien begleitest du gleichzeitig?
+    antwort: Höchstens drei. Dann habe ich genug Zeit für eure Rückfragen und kann den Plan anpassen, wenn etwas nicht passt. Ob gerade ein Platz frei ist, klären wir im Kennenlernen.
+text_3: |-
+  ## Fragen zur Online-Beratung
+
+  Ob ihr für Zoom ein Konto braucht, ob beide Elternteile teilnehmen können und wie ihr den Schlafplan bekommt, beantworte ich auf der Seite zur [Online-Schlafberatung](online-schlafberatung.html#fragen).
+kontaktbereich_titel: Eure Frage ist nicht dabei?

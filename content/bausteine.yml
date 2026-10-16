@@ -1,0 +1,36 @@
+schwerpunkte:
+  - seite: schlafberatung-baby.html
+    titel: Schlafberatung für Babys
+    text: Von den ersten Wochen bis zum ersten Geburtstag
+    bild: /assets/bilder/hero.webp
+    ausschnitt: 50% 72%
+  - seite: schlafberatung-kleinkind.html
+    titel: Schlafberatung für Kleinkinder
+    text: Für Kinder von 1 bis 6 Jahren
+    bild: /assets/bilder/troesten.webp
+    ausschnitt: 40% 40%
+  - seite: online-schlafberatung.html
+    titel: Online-Schlafberatung
+    text: Per Zoom oder Telefon, deutschlandweit
+    bild: /assets/bilder/online.webp
+    ausschnitt: 50% 40%
+  - seite: schlafberatung-wuerzburg.html
+    titel: Schlafberatung in Würzburg
+    text: Persönliche Termine im Raum Würzburg
+    bild: /assets/bilder/nacht.webp
+    ausschnitt: 50% 30%
+ratgeber_titel: Mehr aus dem Ratgeber
+ratgeber:
+  - seite: baby-einschlafen.html
+    titel: Baby einschlafen sanft begleiten, wenn jeder Abend zum Kampf wird
+    bild: /assets/bilder/einschlafen.webp
+  - seite: baby-durchschlafen.html
+    titel: Baby schläft nicht durch? Was normal ist und was ihr tun könnt
+    bild: /assets/bilder/nacht.webp
+  - seite: schlafwissen.html
+    titel: Sicherer Babyschlaf und verlässliche Quellen
+    bild: /assets/bilder/babybett.webp
+zertifikat:
+  text_lang: Abschlusszertifikat vom 11. März 2026. Laut Zertifikat ist die Ausbildung vom Gesundheitsamt der Stadt Aachen zertifiziert.
+  text_kurz: Mein Abschluss als Babyschlafberaterin, März 2026.
+  link: Zertifikat in voller Größe ansehen

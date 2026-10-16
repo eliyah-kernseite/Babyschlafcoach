@@ -1,0 +1,67 @@
+seo:
+  titel: Kostenlos kennenlernen & Termin anfragen | Anna-Lena Korb
+  beschreibung: Kostenloses 20-Minuten-Gespräch zur Babyschlafberatung anfragen. Per Zoom oder Telefon aus ganz Deutschland. Mo–Fr 17–19 Uhr, Sa 9–13 Uhr.
+  menuename: Termin anfragen
+kopf:
+  titel: Termin anfragen und kostenlos kennenlernen
+  text: In 20 Minuten erzählt ihr mir, was bei euch gerade los ist. Welches Angebot passt, müsst ihr vorher noch nicht wissen, das finden wir zusammen heraus.
+text_1: "## So erreicht ihr mich"
+liste_1:
+  - begriff: Telefon
+    text: "[{{telefon}}](tel:{{telefon_nummer}})"
+  - begriff: E-Mail
+    text: "[{{email}}](mailto:{{email}})"
+  - begriff: Gesprächszeiten
+    text: |-
+      Montag–Freitag: 17–19 Uhr
+      Samstag: 9–13 Uhr
+      Sonntag: geschlossen
+  - begriff: Wo wir sprechen
+    text: |-
+      Per Zoom oder Telefon, deutschlandweit.
+      Vor Ort in Würzburg und ca. 10–15 km Umkreis nach Absprache.
+  - begriff: Rückmeldung
+    text: In der Regel innerhalb von 24 Stunden; sonntags und an Feiertagen am nächsten Beratungstag.
+  - begriff: Anschrift
+    text: |-
+      Anna-Lena Korb
+      Müllersweg 15, 97249 Eisingen
+text_2: "{.small} Eine Anfrage ist keine feste Buchung und löst keine Zahlungspflicht aus."
+text_3: |-
+  ## Eure Terminanfrage
+
+  Wähle bis zu drei Wunschzeiten. Ich bestätige dir anschließend einen passenden Termin per E-Mail.
+text_4: |-
+  Ich melde mich in der Regel innerhalb von 24 Stunden per E-Mail bei dir und bestätige einen passenden Termin, sonntags und an Feiertagen am nächsten Beratungstag. Erst mit meiner Bestätigung ist der Termin vereinbart.
+
+  Keine Antwort bekommen? Schau bitte auch im Spam-Ordner nach oder ruf mich an: [{{telefon}}](tel:{{telefon_nummer}}).
+text_5: Deine Anfrage ist aber fertig vorbereitet. Öffne den Entwurf und sende die E-Mail selbst ab, dann kommt sie genauso bei mir an.
+text_6: "{.small} Mit „In Gmail öffnen“ wird der Entwurf an Google übergeben. Alternativ den Text kopieren und an {{email}} senden."
+text_7: |-
+  ## Termin per E-Mail anfragen
+
+  Bitte nenne bis zu drei Wunschtermine mit mindestens sieben Tagen Vorlauf: Montag bis Freitag 17–19 Uhr oder Samstag 9–13 Uhr. Anna-Lena bestätigt dir einen passenden Termin.
+text_8: "[{{email}}](mailto:{{email}})"
+text_9: |-
+  ## So geht es nach eurer Anfrage weiter
+
+  Das Kennenlernen dauert 20 Minuten und ist kostenlos. Nach eurer Anfrage melde ich mich in der Regel innerhalb von 24 Stunden und bestätige euch per E-Mail einen Termin, auf Anfragen vom Sonntag oder einem Feiertag am nächsten Beratungstag.
+
+  Im Gespräch erzählt ihr, was euch gerade belastet und was ihr euch wünscht. Ich erkläre euch, wie ich arbeite, und wir schauen zusammen, ob eine Schlafsprechstunde reicht oder eine längere Begleitung sinnvoller ist. Danach entscheidet ihr in Ruhe, und zahlen müsst ihr für das Gespräch nichts.
+
+  ## Für wen das Kennenlernen gedacht ist
+
+  Für alle Familien mit Kindern bis sechs Jahre, die überlegen, ob eine Schlafberatung etwas für sie wäre. Entschieden oder ein Paket ausgesucht haben müsst ihr dafür noch nichts. Oft wissen Eltern vorher nur, dass es so nicht weitergehen kann, und das reicht völlig. Im Gespräch sortieren wir dann zusammen, was euch gerade am meisten zu schaffen macht und was als Nächstes sinnvoll wäre. Ob ihr dabei in Hamburg, München oder im Raum Würzburg sitzt, ist egal.
+
+  ## Was ihr für das Kennenlernen braucht
+
+  Für ein Gespräch per Zoom genügt ein Smartphone, Tablet oder Laptop mit Kamera, ein eigenes Zoom-Konto braucht ihr nicht. Lieber telefonieren? Dann stimmen wir die Rufnummer per E-Mail ab. Es hilft, wenn ihr euch vorher kurz notiert, wann euer Kind gerade schläft und was euch am meisten belastet.
+
+  ## Lieber direkt anrufen?
+
+  Zu den Gesprächszeiten erreicht ihr mich auch telefonisch. Wenn ich gerade nicht rangehen kann, schreibt mir eine kurze E-Mail mit eurem Namen und eurem Anliegen, dann melde ich mich zurück.
+text_10: |-
+  ### Gut zu wissen
+
+  Ich begleite höchstens drei Familien gleichzeitig. Ob und ab wann ein Platz frei ist, besprechen wir im Kennenlernen.
+button_1: Zum Ablauf

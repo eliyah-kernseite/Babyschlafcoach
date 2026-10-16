@@ -1,0 +1,40 @@
+seo:
+  titel: "Babyschlaf-Ratgeber: Einschlafen & Durchschlafen"
+  beschreibung: "Ratgeber für Eltern zum Babyschlaf: Einschlafen, nächtliches Aufwachen und sichere Schlafumgebung, mit Quellenangaben von BIÖG und WHO."
+  menuename: Ratgeber
+kopf:
+  titel: Ratgeber Babyschlaf rund ums Einschlafen, Durchschlafen und den sicheren Schlafplatz
+  text: Zwischen all den widersprüchlichen Tipps sollen euch diese Seiten etwas Orientierung geben. Eine persönliche Beratung oder ärztliche Untersuchung ersetzen sie nicht.
+abschnitt_1:
+  titel: Babyschlaf-Ratgeber für Eltern
+  text: Ausführlicher geht es in diesen beiden Artikeln ums Einschlafen und um die Frage, warum euer Baby nachts aufwacht.
+abschnitt_2:
+  titel: Was ihr über Babyschlaf wissen solltet
+text_1: |-
+  ### Nicht jedes Aufwachen ist ein Problem
+
+  Wie sich Schlaf entwickelt, ist von Kind zu Kind verschieden. Eine feste Stundenzahl, an der man alle Kinder misst, hilft da wenig. Sinnvoller ist es, auf Alter und Entwicklung zu schauen und darauf, wie sehr euch das Ganze als Familie belastet. Welche Veränderung würde euch wirklich weiterhelfen?
+
+  Hintergrund und Informationen nach Alter: [BIÖG: Schlafen im ersten Lebensjahr](https://www.kindergesundheit-info.de/themen/schlafen/0-12-monate/).
+text_2: |-
+  ### Nähe ist keine schlechte Gewohnheit
+
+  Wenn die Einschlafbegleitung anstrengend wird, darf sich etwas ändern, ohne dass man Eltern deshalb Vorwürfe macht. Ein Ziel in der Beratung kann zum Beispiel sein, neue Abläufe zu finden oder das Begleiten auf mehrere vertraute Personen zu verteilen.
+
+  Auch Stillen nach dem ersten Geburtstag ist nicht automatisch ein Problem. Die WHO empfiehlt, neben passender Beikost bis zum Alter von zwei Jahren oder länger weiter zu stillen. Das heißt nicht, dass jede Familie so lange stillen muss. Umgekehrt muss aber auch niemand für eine Schlafberatung abstillen. [WHO: Infant and young child feeding](https://www.who.int/news-room/fact-sheets/detail/infant-and-young-child-feeding).
+text_3: |-
+  ### Der sichere Schlafplatz hat Vorrang
+
+  Für Säuglinge empfiehlt das BIÖG die Rückenlage, eine feste, ebene Matratze und einen eigenen Schlafplatz im Elternschlafzimmer. Kissen und weiche Nestchen gehören nicht ins Babybett. Selbstständiger einzuschlafen bedeutet übrigens nicht, dass ein Baby allein in einem anderen Zimmer schlafen soll.
+
+  Die vollständigen Empfehlungen findet ihr beim [BIÖG: Die richtige Schlafumgebung für das Baby](https://www.kindergesundheit-info.de/themen/schlafen/0-12-monate/schlafumgebung/).
+text_4: |-
+  ### Manche Fragen gehören in die Kinderarztpraxis
+
+  In der Schlafberatung geht es um Alltag, Routinen und Begleitung. Medizinische Diagnostik oder Therapie ist sie nicht. Wenn euer Kind gesundheitliche Beschwerden hat, lasst mögliche Ursachen bitte kinderärztlich abklären, bevor ihr sie als reine Schlafgewohnheit abhakt.
+
+  [Häufige Fragen zur Beratung](fragen.html)
+text_5: |-
+  ## Woher die Informationen stammen
+
+  Die verlinkten Fachinformationen kommen vom Bundesinstitut für Öffentliche Gesundheit (BIÖG) und von der Weltgesundheitsorganisation (WHO). Die Texte im Ratgeber sind eigene Zusammenfassungen. Die Empfehlungen zur Schlafumgebung wurden zuletzt am 9. Oktober 2026 nachgeprüft, die übrigen Quellen am 13. September 2026.
